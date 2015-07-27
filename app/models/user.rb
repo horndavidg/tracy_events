@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
 	  end
 	 
 	  def expired?
-	    expires_at < Time.now
+
+	    Time.at(expires_at) < Time.now
 	  end
 	 
 	  def fresh_token
