@@ -6,36 +6,55 @@
 
 
 <% @events.each do |event|%>
- <div class="container-fluid">
-  <div class="row">
-
-<div class="col-md-6">
-<div class="text-center">
-
+<div>
+<h3>Event Address:</h3>
 <h4><%= event.address %></h4>
-
-<div class="col-md-6">
+</div>
+<div>
+<h3>Event Description:</h3>
 <h4><%= event.description %></h4>
 </div>
-</div>
-</div>
-<% end %> 
+<%= link_to "Event Show Page", event_path(event.id)%>
+<% end %>
 
 
 <h1>Create an event</h1>
 
-<%= form_for( [@user, @event], html:{class: "form-horizontal", role: "form"}) do |f| %>
+<%= form_for( [@event], html:{class: "form-horizontal", role: "form"}) do |f| %>
   <div class="form-group">
     <%= f.label :date, class: "col-sm-2" %>
     <div class="col-sm-4">
-      <%= f.datetime_field :user, :meeting_time, class: "form-control" %>
+     <%= f.date_field :date, class: "form-control" %>
     </div>
   </div>
+   <div class="form-group">
+    <%= f.label :time, class: "col-sm-2" %>
+    <div class="col-sm-4">
+      <%= f.time_field :time, class: "form-control" %>
+    </div>
+    </div>
    <div class="form-group">
     <%= f.label :duration, class: "col-sm-2" %>
     <div class="col-sm-4">
       <%= f.text_field :duration, class: "form-control" %>
     </div>
+  </div>
+   <div class="form-group">
+    <%= f.label :address, class: "col-sm-2" %>
+    <div class="col-sm-4">
+      <%= f.text_field :address, class: "form-control", placeholder:"address in Tracy" %>
+    </div>
+  </div>   
+  <div class="form-group">
+    <%= f.label :lat, class: "col-sm-2" %>
+    <div class="col-sm-4">
+      <%= f.text_field :lat, class: "form-control" %>
+    </div>
+     <%= f.label :long, class: "col-sm-2" %>
+    <div class="col-sm-4">
+      <%= f.text_field :long, class: "form-control" %>
+    </div>
+
   </div>
   <div class="form-group">
     <%= f.label :description, class: "col-sm-2" %>
