@@ -27,8 +27,10 @@ class ApplicationController < ActionController::Base
  def current_user
   # Let's not make a database query if we don't need to!
    return unless session[:user_id]
+   # binding.pry
   # Defines @current_user if it is not already defined.
-   @current_user ||= User.find_by_id(session[:user_id])
+   @current_user ||= User.find_by(google_id: session[:user_id])
+   # binding.pry
  end
   helper_method :current_user #make it available in views (it will be available in all controllers as well
 
