@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :photos, only: [:edit, :create, :destroy, :update], shallow: true
   end
 
+  get "send_to_google", to: "events#send_to_google", as: "send_to_google"
+
 #         Prefix Verb   URI Pattern                          Controller#Action
 #    photos_edit GET    /photos/edit(.:format)               photos#edit
 #     photos_new GET    /photos/new(.:format)                photos#new

@@ -31,6 +31,9 @@ gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
 gem 'json'
 
+gem 'google-api-client', :require => 'google/api_client'
+gem 'chronic'
+
 
 group :development do
   gem 'pry-rails'
