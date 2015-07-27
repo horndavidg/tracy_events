@@ -91,17 +91,11 @@ GEM
     execjs (2.5.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-<<<<<<< HEAD
-    globalid (0.3.5)
-      activesupport (>= 4.1.0)
-    hashie (3.4.2)
-=======
     ffi (1.9.10)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     hashie (3.4.2)
     hitimes (1.2.2)
->>>>>>> 6c9df78b0a06724e288a98e02c57fbc2eff406a9
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)

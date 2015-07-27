@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   root "sessions#new"
 
+  get "/logout" => "sessions#logout"
+
   get "/auth/:provider/callback" => 'sessions#create'
   resources :sessions, only: [:new]
   resources :users, only: [:show,:destroy]
