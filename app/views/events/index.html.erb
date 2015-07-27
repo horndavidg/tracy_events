@@ -2,74 +2,25 @@
 
 
 
-
-
-
-
-
 <% @events.each do |event|%>
+
 <div>
-<h3>Event Address:</h3>
-<h4><%= event.address %></h4>
+<h3>Event Name:</h3>
+<h4><%= event.name %></h4>
 </div>
 <div>
 <h3>Event Description:</h3>
 <h4><%= event.description %></h4>
 </div>
+<div>
+<h5>Created By: <%= event.creator_id%></h5>
+</div>
 <%= link_to "Event Show Page", event_path(event.id)%>
+/ <%= link_to "Event Edit Page", edit_event_path(event.id)%>
 <% end %>
 
 
 <h1>Create an event</h1>
 
-<%= form_for( [@event], html:{class: "form-horizontal", role: "form"}) do |f| %>
-  <div class="form-group">
-    <%= f.label :date, class: "col-sm-2" %>
-    <div class="col-sm-4">
-     <%= f.date_field :date, class: "form-control" %>
-    </div>
-  </div>
-   <div class="form-group">
-    <%= f.label :time, class: "col-sm-2" %>
-    <div class="col-sm-4">
-      <%= f.time_field :time, class: "form-control" %>
-    </div>
-    </div>
-   <div class="form-group">
-    <%= f.label :duration, class: "col-sm-2" %>
-    <div class="col-sm-4">
-      <%= f.text_field :duration, class: "form-control" %>
-    </div>
-  </div>
-   <div class="form-group">
-    <%= f.label :address, class: "col-sm-2" %>
-    <div class="col-sm-4">
-      <%= f.text_field :address, class: "form-control", placeholder:"address in Tracy" %>
-    </div>
-  </div>   
-  <div class="form-group">
-    <%= f.label :lat, class: "col-sm-2" %>
-    <div class="col-sm-4">
-      <%= f.text_field :lat, class: "form-control" %>
-    </div>
-     <%= f.label :long, class: "col-sm-2" %>
-    <div class="col-sm-4">
-      <%= f.text_field :long, class: "form-control" %>
-    </div>
-
-  </div>
-  <div class="form-group">
-    <%= f.label :description, class: "col-sm-2" %>
-    <div class="col-sm-4">
-      <%= f.text_area :description, class: "form-control" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10 col-sm-offset-2">
-      <%= f.submit class:"btn btn-primary" %>
- 
-    </div>
-  </div>
-  
-<% end %>
+<%= render partial: 'form' %>
 

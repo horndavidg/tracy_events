@@ -1,2 +1,24 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<h1><%= @event.name %></h1>
+<h2><%= @event.description%></h2>
+<%= binding.pry%>
+<div class="row">
+  <% @event.photos.each do |photo| %>
+    <div class="col-sm-6 col-md-4" style="height:436.667px;">
+      <div class="thumbnail">
+        <%= image_tag(photo.url) %>
+        <div class="caption">
+            <p><%= photo.description %></p>
+            <p><%= photo.creator_id %></p>
+          <h3><%= link_to "edit", edit_photo_path(photo) %></h3>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+ <%= link_to "Delete", @event, method: :delete,  class:"btn btn-warning" %>
+ 
+<h2>Add Photos:</h2>
+
+ <%= render partial: 'photo_form' %>
