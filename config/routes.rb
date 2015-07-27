@@ -1,72 +1,41 @@
 Rails.application.routes.draw do
-  get 'edit/new'
 
-  get 'comments/edit'
+  get 'photos/edit'
 
-  get 'comments/new'
+  get 'photos/new'
 
-  get 'events/index'
+  root "sessions#welcome"
 
-  get 'events/show'
+  resources :sessions, only: [:new, :create]
+  resources :users, only: [:show,:destroy]
+  resources :events, except: [:new] do
+    resources :comments, only: [:create, :edit, :update, :destroy], shallow: true
+    resources :photos, only: [:edit, :create, :destroy, :update], shallow: true
+  end
 
-  get 'events/edit'
-
-  get 'users/show'
-
-  get 'sessions/welcome'
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+#         Prefix Verb   URI Pattern                          Controller#Action
+#    photos_edit GET    /photos/edit(.:format)               photos#edit
+#     photos_new GET    /photos/new(.:format)                photos#new
+#           root GET    /                                    sessions#welcome
+#       sessions POST   /sessions(.:format)                  sessions#create
+#    new_session GET    /sessions/new(.:format)              sessions#new
+#           user GET    /users/:id(.:format)                 users#show
+#                DELETE /users/:id(.:format)                 users#destroy
+# event_comments POST   /events/:event_id/comments(.:format) comments#create
+#   edit_comment GET    /comments/:id/edit(.:format)         comments#edit
+#        comment PATCH  /comments/:id(.:format)              comments#update
+#                PUT    /comments/:id(.:format)              comments#update
+#                DELETE /comments/:id(.:format)              comments#destroy
+#   event_photos POST   /events/:event_id/photos(.:format)   photos#create
+#     edit_photo GET    /photos/:id/edit(.:format)           photos#edit
+#          photo PATCH  /photos/:id(.:format)                photos#update
+#                PUT    /photos/:id(.:format)                photos#update
+#                DELETE /photos/:id(.:format)                photos#destroy
+#         events GET    /events(.:format)                    events#index
+#                POST   /events(.:format)                    events#create
+#     edit_event GET    /events/:id/edit(.:format)           events#edit
+#          event GET    /events/:id(.:format)                events#show
+#                PATCH  /events/:id(.:format)                events#update
+#                PUT    /events/:id(.:format)                events#update
+#                DELETE /events/:id(.:format)                events#destroy
 end
