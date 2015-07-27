@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get 'photos/new'
 
-  root "sessions#welcome"
+  root "sessions#new"
 
   resources :sessions, only: [:new, :create]
   resources :users, only: [:show,:destroy]
