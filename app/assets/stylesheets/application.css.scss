@@ -22,6 +22,11 @@
  // Then bootstrap itself
  @import "bootstrap";
 
+ @import "bootswatch/united/variables";
+
+ @import "bootswatch/united/bootswatch";
+
+
  // And finally bootswatch style itself
  // @import "bootswatch/journal/bootswatch";
 

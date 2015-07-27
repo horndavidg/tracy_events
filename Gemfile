@@ -48,13 +48,25 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'puma'
+
+gem 'typhoeus'
+
+gem 'sidekiq'
+
+gem 'activerecord-import', '~> 0.7.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers'
-  gem "capybara"
+  gem "capybara"  
+  gem 'capybara-email'
+
+  gem 'puma-rails'
+
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
