@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :access_token
       t.string :refresh_token
-      t.datetime :expires_at
+      t.integer :expires_at
       t.string :google_id
       t.string :name
       t.string :email
