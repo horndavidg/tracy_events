@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  get 'edit/new'
+
+  get 'comments/edit'
+
+  get 'comments/new'
+
+  get 'events/index'
+
+  get 'events/show'
+
+  get 'events/edit'
+
+  get 'users/show'
+
+  get 'sessions/welcome'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

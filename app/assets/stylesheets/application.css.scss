@@ -13,3 +13,38 @@
  *= require_tree .
  *= require_self
  */
+
+  // Example using bootswatch
+ //
+ // First import  variables
+ // @import "bootswatch/journal/variables";
+
+ // Then bootstrap itself
+ @import "bootstrap";
+
+ // And finally bootswatch style itself
+ // @import "bootswatch/journal/bootswatch";
+
+ // If you want to import your own styles just use 
+
+ // @import "name_of_scss file"
+
+ // Here are the free themes you can use:
+
+ // Amelia
+ // Cerulean
+ // Cosmo
+ // Cyborg
+ // Darkly
+ // Flatly
+ // Journal
+ // Lumen
+ // Paper
+ // Readable
+ // Sandstone
+ // Simplex
+ // Slate
+ // Spacelab
+ // Superhero
+ // United
+ // Yeti
