@@ -35,6 +35,5 @@ class User < ActiveRecord::Base
 	    access_token
 	  end
 	 
-	end
 
 end
