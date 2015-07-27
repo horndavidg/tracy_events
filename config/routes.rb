@@ -4,9 +4,10 @@ Rails.application.routes.draw do
 
   get 'photos/new'
 
-  root "sessions#welcome"
+  root "sessions#new"
 
-  resources :sessions, only: [:new, :create]
+  get "/auth/:provider/callback" => 'sessions#create'
+  resources :sessions, only: [:new]
   resources :users, only: [:show,:destroy]
   resources :events, except: [:new] do
     resources :comments, only: [:create, :edit, :update, :destroy], shallow: true
