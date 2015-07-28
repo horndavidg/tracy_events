@@ -39,8 +39,11 @@ function initialize() {
 			          
 			    });
 
+			    var date = event.start_date.substring(0, event.start_date.length - 14)
+			    var orderedDate = date.slice(5,7) + "/" + date.slice(8,10) + "/" + date.slice(0,4);
+
 			    tableBody = $("#events_table tbody")
-			    html= '<tr><td><a href="/events/' + event.id + '">' + event.name + '</a></td><td>' + event.date + '</td></tr>'
+			    html= '<tr><td><a href="/events/' + event.id + '">' + event.name + '</a></td><td>' + orderedDate + '</td></tr>'
 			    tableBody.append(html)
 
 	    	})

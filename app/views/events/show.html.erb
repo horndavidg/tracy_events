@@ -6,6 +6,9 @@
 <h1><%= @event.name %></h1>
 <h2><%= @event.description%></h2>
 
+<!-- Add to google calendar link -->
+<a href="/send_to_google?event_id=<%= @event.id %>"><img src="https://www.google.com/calendar/b/0/images/calendar_plus_en.gif" alt="Add to Google Calendar"></a>
+
 <div class="row">
   <% @event.photos.each do |photo| %>
     <div class="col-sm-6 col-md-4" style="height:436.667px;">
@@ -26,6 +29,9 @@
 <footer><%= link_to comment.creator_name, user_path(comment.creator_id) %></footer>
 </blockquote>
   <% end %>
+
+
+
 
 <h2>Add Photos:</h2>
 
