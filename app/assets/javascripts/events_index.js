@@ -1,71 +1,72 @@
+// var map = ""
 $(".events.index").ready(function() {
-	function initialize() {
-	            //sets the long and lat of map
-	            var myLatlng = new google.maps.LatLng(lat, long);
-
-	            //options for the map
-	            var myOptions = {
-	                center: myLatlng,
-	                zoom: 9,
-	                mapTypeId: google.maps.MapTypeId.ROADMAP
-	            };
-
-	            //creates the map
-	            var mymap = new google.maps.Map(document.getElementById("map_canvas"),
-	                myOptions);
-
-	            //sets min and max zoom values
-	            var opt = { minZoom: 7, maxZoom: 11 };
-	                mymap.setOptions(opt);
-
-	            //creates marker
-	            var marker = new google.maps.Marker({
-	                position: myLatlng,
-	                map: mymap,
-	                title:"Hello World!"
-	            });
-
-	            //content of infowindow
-	            var contentString = '<h2>I am an info window</h2>'+'<p>Hello my name is infowindow, I need more text to test how big I get</p>';
-
-	            //creates infowindow
-	            var infowindow = new google.maps.InfoWindow({
-	                    content: contentString,
-	            });
-
-	            //infowindow options
-	            infowindow.setOptions({maxWidth:200}); 
-
-	            //listens for click and opens infowindow
-	            google.maps.event.addListener(marker, 'click', function() {
-	                 infowindow.open(mymap,marker);
-	            });
-	            // Bounds for UK
-	            var strictBounds = new google.maps.LatLngBounds(
-	                    new google.maps.LatLng(60.88770, -0.83496), 
-	                    new google.maps.LatLng(49.90878, -7.69042)
-	            );
-
-	            // Listen for the dragend event
-	            google.maps.event.addListener(mymap, 'dragend', function() {
-	                if (strictBounds.contains(mymap.getCenter())) return;
-
-	                // We're out of bounds - Move the map back within the bounds
-	                var c = mymap.getCenter(),
-	                x = c.lng(),
-	                y = c.lat(),
-	                maxX = strictBounds.getNorthEast().lng(),
-	                maxY = strictBounds.getNorthEast().lat(),
-	                minX = strictBounds.getSouthWest().lng(),
-	                minY = strictBounds.getSouthWest().lat();
-
-	                if (x < minX) x = minX;
-	                if (x > maxX) x = maxX;
-	                if (y < minY) y = minY;
-	                if (y > maxY) y = maxY;
-
-	                mymap.setCenter(new google.maps.LatLng(y, x));
-	            });
-	        }
-	        initialize()
+	initialize()
 })
+
+function initialize() {
+	var mapCanvas = document.getElementById('map_canvas');
+	console.log("IN HERE???")
+	console.log(mapCanvas)
+	// console.log(map)
+	var mapOptions = {
+
+			minZoom: 12,
+	      	center: new google.maps.LatLng(37.72840, -121.43164),
+	      	zoom: 12,
+	      	mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };
+
+	var map = new google.maps.Map(mapCanvas, mapOptions);
+
+
+}
+
+
+// function initialize() {
+//         var mapCanvas = document.getElementById('map_canvas');
+//         var mapOptions = {
+//           center: new google.maps.LatLng(44.5403, -78.5463),
+//           zoom: 8,
+//           mapTypeId: google.maps.MapTypeId.ROADMAP
+//         }
+//         var map = new google.maps.Map(mapCanvas, mapOptions)
+//       }
+//       google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+// $(".events.index").load(function() {
+// 	console.log("hello")
+// 	// var map 
+// 	// function initialize() {
+// 	//     // Puts the Google Map on the page, make sure it 
+// 	//     // always has dimensions assigned.... 
+
+// 	//     map = new google.maps.Map(document.getElementById('map-canvas'), {
+// 	//       zoom: 2,
+// 	//       center: {lat: 39.7643389, lng: -104.8551114} // Centered on Denver, CO
+// 	//     });
+
+
+// 	//     var mapDiv = document.getElementById('map-canvas');
+
+// 	//     google.maps.event.addListener(map, 'click', addMarker);
+	  
+// 	// }
+// 	// initialize()
+
+// 	// function waitUntilDoneLoading(map_id, next) {
+// 	// 	var map = document.getElementById('map-canvas');
+// 	// 	console.log(map)
+// 	// 	return next(map)
+// 	// }
+
+	
+	
+
+
+// 	// waitUntilDoneLoading("map-canvas", initialize)
+
+
+// 	initialize()
+// })
