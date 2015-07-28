@@ -16,13 +16,16 @@ function initialize() {
 	var map = new google.maps.Map(mapCanvas, mapOptions);
 
 	  $.ajax({
-	      type: 'POST',
-	      url: '/show',
-	      data: data,
+	      type: 'GET',
+	      url: '/events.json',
+	      // data: data,
 	      dataType: 'json'
 	    }).done(function(data) {
-	    
-
+	    	console.log("hello")
+	    	console.log(data)
+	    	data.forEach(function(event) {
+	    		
+	    	})
 	});
 }
 
