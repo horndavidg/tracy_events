@@ -5,9 +5,6 @@ $(".events.index").ready(function() {
 
 function initialize() {
 	var mapCanvas = document.getElementById('map_canvas');
-	console.log("IN HERE???")
-	console.log(mapCanvas)
-	// console.log(map)
 	var mapOptions = {
 
 			minZoom: 12,
@@ -18,7 +15,15 @@ function initialize() {
 
 	var map = new google.maps.Map(mapCanvas, mapOptions);
 
+	  $.ajax({
+	      type: 'POST',
+	      url: '/show',
+	      data: data,
+	      dataType: 'json'
+	    }).done(function(data) {
+	    
 
+	});
 }
 
 
