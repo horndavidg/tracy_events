@@ -3,7 +3,7 @@
 
 <%= link_to "Add this to google calendar", send_to_google_path%>
 
-
+<% if @events%>
 
 <% @events.each do |event|%>
 
@@ -18,6 +18,11 @@
 <div>
 <h5>Created By: <%= link_to event.creator_name, user_path(event.creator_id) %></h5>
 </div>
+<% end %>
+
+<% else %>
+
+<h4>No Events Listed....</h4>
 
 <% end %>
 

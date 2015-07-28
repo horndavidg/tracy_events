@@ -8,7 +8,6 @@ class CreateEvents < ActiveRecord::Migration
       t.string :end_time
       t.string :name
       t.string :address
-      t.string :time
       t.string :lat
       t.string :long
       t.text :description

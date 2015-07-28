@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 	  		c.expires_at = @auth['credentials']['expires_at']
 	  		 # binding.pry
 		end
-		binding.pry
+		# binding.pry
 		@user.fresh_token
 		session[:user_id] = @user.google_id
 		# binding.pry

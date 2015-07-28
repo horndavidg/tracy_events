@@ -111,11 +111,13 @@ private
 
 def event_params
     params.require(:event).permit(
-      :date,
+      :start_date,
+      :end_date,
       :description,
       :duration,
       :address, 
-      :time,
+      :start_time,
+      :end_time,
       :lat,
       :long,
       :name

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   
-
+before_action :set_event, only: [:create]
 
 # -----------------------------
 
@@ -60,10 +60,13 @@ private
 
 def comment_params
     params.require(:comment).permit(
-      :comment
+      :content
     )
 end
 
+def set_event
+    @event = Event.find params[:event_id]
+end
 
 
 

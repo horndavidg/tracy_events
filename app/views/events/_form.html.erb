@@ -7,21 +7,25 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :date, class: "col-sm-2" %>
+    <%= f.label :start_date, class: "col-sm-2" %>
     <div class="col-sm-4">
-     <%= f.date_field :date, class: "form-control" %>
+     <%= f.date_field :start_date, class: "form-control" %>
     </div>
-    <%= f.label :time, class: "col-sm-2" %>
+    <%= f.label :end_date, class: "col-sm-2" %>
     <div class="col-sm-4">
-      <%= f.time_field :time, class: "form-control" %>
+     <%= f.date_field :end_date, class: "form-control" %>
     </div>
     </div>
-   <div class="form-group">
-    <%= f.label :duration, class: "col-sm-2" %>
+    <div class="form-group">
+    <%= f.label :start_time, class: "col-sm-2" %>
     <div class="col-sm-4">
-      <%= f.text_field :duration, class: "form-control" %>
+      <%= f.time_field :start_time, class: "form-control" %>
     </div>
-  </div>
+    <%= f.label :end_time, class: "col-sm-2" %>
+    <div class="col-sm-4">
+      <%= f.time_field :end_time, class: "form-control" %>
+    </div>
+    </div>
    <div class="form-group">
     <%= f.label :address, class: "col-sm-2" %>
     <div class="col-sm-4">

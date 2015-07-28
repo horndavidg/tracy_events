@@ -16,7 +16,7 @@
 </div>
  <% @event.comments.each do |comment| %>
 <blockquote>
-<p>comment.content</p>
+<p><%= comment.content%></p>
 </blockquote>
   <% end %>
  <%= link_to "Edit", edit_event_path(@event.id), class:"btn btn-info"%>
