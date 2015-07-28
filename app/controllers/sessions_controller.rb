@@ -1,6 +1,14 @@
 class SessionsController < ApplicationController
+  
+
+before_action :prevent_login_signup, only: [:new]
+
+# ------------------------------------
+
   def new
   end
+
+  # ------------------------------------
 
   def create
   	@auth = request.env['omniauth.auth']
@@ -24,6 +32,8 @@ class SessionsController < ApplicationController
 	  	redirect_to events_path
 	# end
   end
+
+  # ------------------------------------
 
   def logout
   	session[:user_id] = nil

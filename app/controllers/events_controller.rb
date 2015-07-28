@@ -8,6 +8,8 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :attend, :destroy, :edit, :update]
   before_action :find_user, only: [:attend, :create]
   before_action :confirm_logged_in, only: [:edit]
+  before_action :ensure_correct_user_for_event, only: [:edit]
+
 
 # ------------------------------------
 
@@ -261,7 +263,7 @@ end
 
 def ensure_correct_user_for_event
     event = Event.find params[:id]
-    unless event.user.id == session[:user_id]
+    unless event.creator_id.to_i == current_user.id
       redirect_to :back, alert: "Not Authorized"
     end
 end
