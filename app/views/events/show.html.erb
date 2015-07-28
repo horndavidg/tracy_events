@@ -14,6 +14,11 @@
     </div>
   <% end %>
 </div>
+ <% @event.comments.each do |comment| %>
+<blockquote>
+<p>comment.content</p>
+</blockquote>
+  <% end %>
  <%= link_to "Edit", edit_event_path(@event.id), class:"btn btn-info"%>
 <h2>Add Photos:</h2>
 
