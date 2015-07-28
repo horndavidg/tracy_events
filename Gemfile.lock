@@ -115,6 +115,11 @@ GEM
       memoist (~> 0.12)
       multi_json (= 1.11)
       signet (~> 0.6)
+    handlebars_assets (0.20.2)
+      execjs (~> 2.0)
+      multi_json (~> 1.0)
+      sprockets (>= 2.0.0, < 4.0)
+      tilt (~> 1.2)
     hashie (3.4.2)
     hitimes (1.2.2)
     hurley (0.1)
@@ -299,6 +304,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   dotenv-rails
   google-api-client (= 0.9.pre2)
+  handlebars_assets
   jbuilder (~> 2.0)
   jquery-rails
   json

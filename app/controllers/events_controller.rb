@@ -39,7 +39,7 @@ redirect_to events_path, flash: {alert: "Please enter a valid address!"}
 elsif params[:event][:address] != ""
 
   query = URI.encode(params[:event][:address])
-  loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}")
+  loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}&bounds=37.660450,-121.507759|37.773429,-121.329231")
   result = JSON.parse loc.response_body
 
     if result["results"] == []

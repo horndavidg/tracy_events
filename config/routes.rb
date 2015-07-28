@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get "/logout" => "sessions#logout"
 
+  get "/json_events" => "events#index"
 
   get "/auth/:provider/callback" => 'sessions#create'
   resources :sessions, only: [:new]

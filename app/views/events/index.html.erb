@@ -1,8 +1,47 @@
 <h1 class="text-center">See all Events</h1>
 
 
+<div class="row" >
+	<div class="col-md-6">
+		<div id="map_canvas" style="width:100%; height:400px;"></div>
+	</div>
 
-<div id="map_canvas" style="width:500px; height:400px;"></div>
+	<div class="col-md-6"style="height: 400px; overflow: scroll;" >
+		<% if @events %>
+			
+			<table class="table table-hover" id="events_table">
+				<thead>
+					<tr>
+						<th>Event</th>
+						<th>Date</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>al;ksd</td>
+						<td>asd</td>
+
+					</tr>
+					
+				</tbody>
+			</table>
+
+
+		<% else %>
+
+			<h4>No Events Listed....</h4>
+
+		<% end %>
+	</div>
+
+
+</div>
+
+
+
+
+
 
 
 
