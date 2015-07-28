@@ -2,6 +2,10 @@
 
 All of those huge event sites are out of scope, you are a local and so you use Local Me.
 
+Problems with Google Auth? Visit:
+
+https://security.google.com/settings/security/permissions
+
 
 
 
