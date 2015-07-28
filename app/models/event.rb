@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
 
-	validates :description, :name, :long, :lat, :time, :address, :duration, :date, :creator_id, presence: true
+	validates :description, :name, :long, :lat, :address, :start_time, :end_time, :start_date, :end_date, :creator_id, presence: true
 	has_many :event_users, dependent: :destroy
 	has_many :users, through: :event_users
 

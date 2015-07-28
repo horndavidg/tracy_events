@@ -1,4 +1,6 @@
 require 'chronic'
+require 'googleauth'
+require 'google/apis/calendar_v3'
 
 class EventsController < ApplicationController
 
@@ -62,23 +64,21 @@ end
 
   def send_to_google
 
-    @event = {
-      'summary' => 'New Event Title',
-      'description' => 'The description',
-      'location' => 'Location',
-      'start' => { 'dateTime' => Chronic.parse('tomorrow 4 pm') },
-      'end' => { 'dateTime' => Chronic.parse('tomorrow 5pm') },
-      'attendees' => [ { "email" => 'bob@example.com' },
-      { "email" =>'sally@example.com' } ] }
+    calendar = Google::Apis::CalendarV3::CalendarService.new
 
-    client = Google::APIClient.new
-    client.authorization.access_token = @current_user.access_token
-    service = client.discovered_api('calendar', 'v3')
+    calendar.authorization = Signet::OAuth2::Client.new({
+      client_id: ENV['CLIENT_ID'],
+      client_secret: ENV['CLIENT_SECRET'],
+      access_token: @current_user.access_token
+    })
 
-    @set_event = client.execute(:api_method => service.events.insert,
-                            :parameters => {'calendarId' => @current_user.email, 'sendNotifications' => true},
-                            :body => JSON.dump(@event),
-                            :headers => {'Content-Type' => 'application/json'})
+    event = Google::Apis::CalendarV3::Event.new(summary: 'A third sample event',
+                                location: '1600 Amphitheatre Parkway, Mountain View, CA 94045',
+
+                                start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
+                                end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
+    event = calendar.insert_event('primary', event, send_notifications: true)
+
 
     redirect_to events_path
     

@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20150728004452) do
     t.string   "creator_id"
     t.datetime "date"
     t.string   "duration"
-    t.string   "name"
     t.string   "address"
     t.string   "time"
     t.string   "lat"
