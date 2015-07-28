@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
   get 'photos/edit'
-
   get 'photos/new'
+
+  post "events/:id", to: "events#attend", as: "attend"
 
   root "sessions#new"
 
   get "/logout" => "sessions#logout"
+
 
   get "/auth/:provider/callback" => 'sessions#create'
   resources :sessions, only: [:new]

@@ -5,8 +5,8 @@ require 'google/apis/calendar_v3'
 class EventsController < ApplicationController
 
 
-  before_action :set_event, only: [:show, :destroy, :edit, :update]
-
+  before_action :set_event, only: [:show, :attend, :destroy, :edit, :update]
+  before_action :find_user, only: [:attend, :create]
 
 # ------------------------------------
 
@@ -25,8 +25,8 @@ def create
 
 if @current_user
    @event.creator_id = @current_user.id
-    @event.creator_name = @current_user.name
-# @event.creator_id = @current_user.google_id
+   @event.creator_name = @current_user.name
+   @user.events << @event
 end  
 
 if @event.save
@@ -58,6 +58,10 @@ end
   # ------------------------------------
 
   def attend
+
+@user.events << @event
+
+redirect_to event_path(@event.id), flash: {success: "#{@user.name} is Attending!"}
     
   end
 
@@ -159,6 +163,11 @@ end
 
 
 
+def find_user
+
+    @user = User.find @current_user.id
+    
+end
 
 
 

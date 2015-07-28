@@ -2,7 +2,15 @@
 
 <h3>Email: <%= @user.email%></h3>
 
+<h4>Events Created:</h4>
+<% @created_events.each do |event| %>
 
+<p><%= event.name%></p>
+
+<% end %>
+
+
+<h4>Events Attending:</h4>
 <% @user.events.each do |event| %>
 
 <p><%= event.name%></p>
