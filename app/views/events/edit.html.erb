@@ -25,6 +25,7 @@
 <h3>Edit Comments:</h3>
  <% @event.comments.each do |comment| %>
 <blockquote>
+<h4><%= link_to "edit", edit_comment_path(comment) %> /  <%= link_to "remove", comment, method: :delete %></h4>
 <p><%= comment.content%></p>
 <footer><%= link_to comment.creator_name, user_path(comment.creator_id) %></footer>
 </blockquote>
