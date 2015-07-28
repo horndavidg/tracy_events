@@ -5,8 +5,13 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=MYKEY&sensor=false">
+  </script>
+
+  
 </head>
-<body>
+<body class = "<%= controller_name %> <%= action_name %>">
 
   <nav id="mainNav" class="navbar navbar-default">
     <div class="container-fluid">
