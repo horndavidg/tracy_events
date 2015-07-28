@@ -15,6 +15,15 @@ class EventsController < ApplicationController
   	@events = Event.all
   	@event = Event.new
 
+    respond_to do |format|
+      format.html do
+        # binding.pry
+        render :index
+      end
+      # binding.pry
+      format.json { render :json => @events }
+    end
+
   end
 
 # ------------------------------------
