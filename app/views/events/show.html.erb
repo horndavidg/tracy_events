@@ -1,6 +1,6 @@
 <h1><%= @event.name %></h1>
 <h2><%= @event.description%></h2>
-<%= binding.pry%>
+
 <div class="row">
   <% @event.photos.each do |photo| %>
     <div class="col-sm-6 col-md-4" style="height:436.667px;">
@@ -8,17 +8,17 @@
         <%= image_tag(photo.url) %>
         <div class="caption">
             <p><%= photo.description %></p>
-            <p><%= photo.creator_id %></p>
-          <h3><%= link_to "edit", edit_photo_path(photo) %></h3>
+            <p>added by: <%= link_to photo.creator_name, user_path(photo.creator_id) %></p>
         </div>
       </div>
     </div>
   <% end %>
 </div>
-
-
- <%= link_to "Delete", @event, method: :delete,  class:"btn btn-warning" %>
- 
+ <%= link_to "Edit", edit_event_path(@event.id), class:"btn btn-info"%>
 <h2>Add Photos:</h2>
 
  <%= render partial: 'photo_form' %>
+
+ <h2>Add Comments:</h2>
+
+ <%= render partial: 'comment_form' %>

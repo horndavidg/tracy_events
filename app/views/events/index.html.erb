@@ -7,18 +7,17 @@
 <% @events.each do |event|%>
 
 <div>
-<h3>Event Name:</h3>
-<h4><%= event.name %></h4>
+<h4>Event Name:</h4>
+<h3><%= link_to event.name, event_path(event.id)%></h3>
 </div>
 <div>
-<h3>Event Description:</h3>
+<h4>Event Description:</h4>
 <h4><%= event.description %></h4>
 </div>
 <div>
-<h5>Created By: <%= event.creator_id%></h5>
+<h5>Created By: <%= link_to event.creator_name, user_path(event.creator_id) %></h5>
 </div>
-<%= link_to "Event Show Page", event_path(event.id)%>
-/ <%= link_to "Event Edit Page", edit_event_path(event.id)%>
+
 <% end %>
 
 

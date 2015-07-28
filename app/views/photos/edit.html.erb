@@ -1,2 +1,15 @@
-<h1>Photos#edit</h1>
-<p>Find me in app/views/photos/edit.html.erb</p>
+<h1>Edit this Photo:</h1>
+
+<div class="row">
+    <div class="col-sm-6 col-md-4" style="height:436.667px;">
+      <div class="thumbnail">
+        <%= image_tag(@photo.url) %>
+        <div class="caption">
+            <p><%= @photo.description %></p>
+            <p><%= @photo.creator_id %></p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<%= render partial: 'form' %>

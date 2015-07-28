@@ -22,13 +22,15 @@ def create
 @event = Event.new event_params
 
 if @current_user
-   @event.creator_id = @current_user.name
+   @event.creator_id = @current_user.id
+    @event.creator_name = @current_user.name
 # @event.creator_id = @current_user.google_id
 end  
 
 if @event.save
-	redirect_to events_path, flash: {success: "event added!"}
+	redirect_to events_path, flash: {success: "#{@event.name} Added!"}
     else
+    @events = Event.all
     render :index
 end	
 end
@@ -37,6 +39,7 @@ end
 
   def show
     @photo = Photo.new
+    @comment = Comment.new
   end
 
   # ------------------------------------
@@ -44,7 +47,7 @@ end
   def update
     @event.update event_params
     if @event.save
-      redirect_to events_path, flash: {success: "#{@event.name} updated!"}
+      redirect_to events_path, flash: {success: "#{@event.name} Updated!"}
     else
       render :edit
     end
@@ -85,7 +88,7 @@ end
  
  def destroy
     @event.destroy
-    redirect_to events_path, flash: {success: "#{@event.name} was successfully deleted!"}
+    redirect_to events_path, flash: {success: "#{@event.name} was successfully Deleted!"}
  end
 
 
