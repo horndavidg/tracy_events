@@ -4,16 +4,25 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :current_user
 
+  # -------------------------------
 
+ def confirm_logged_in
+    unless session[:user_id]
+      redirect_to new_session_path, alert: "Please log in with your Google Account!"
+    end
+ end
 
+  # -------------------------------
 
+ # Stop a logged in user from going to the sign up page
+  def prevent_login_signup
+    if session[:user_id]
+      redirect_to events_path, notice: "You are already logged in"
+ 
+    end
+  end
 
-
-
-
-
-
-
+  # -------------------------------
 
 
 

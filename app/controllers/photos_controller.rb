@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
   
 before_action :set_photo, only: [:destroy, :edit, :update]
 before_action :set_event, only: [:create]    
-
+before_action :confirm_logged_in, except: [:show, :index]
 
 # ----------------------------
 
@@ -86,8 +86,9 @@ end
 
 
 
+# ----------------------------
 
-private  
+private  # ----------------------------
 
 def photo_params
     params.require(:photo).permit(
@@ -108,5 +109,16 @@ end
     event = Event.find params[:event_id]
     @comments = event.comments
  end
+
+
+
+
+
+
+
+
+
+
+
 
 end

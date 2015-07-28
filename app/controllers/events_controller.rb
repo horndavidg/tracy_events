@@ -7,6 +7,7 @@ class EventsController < ApplicationController
 
   before_action :set_event, only: [:show, :attend, :destroy, :edit, :update]
   before_action :find_user, only: [:attend, :create]
+  before_action :confirm_logged_in, only: [:edit]
 
 # ------------------------------------
 
@@ -228,7 +229,7 @@ redirect_to event_path(@event.id), flash: {success: "#{@user.name} is Attending!
  # ------------------------------------
 
 
-private  
+private  # ----------------------------------
 
 def event_params
     params.require(:event).permit(
@@ -258,9 +259,11 @@ def find_user
 end
 
 
-
-
-
+def ensure_correct_user_for_event
+    event = Event.find params[:id]
+    unless event.user.id == session[:user_id]
+      redirect_to :back, alert: "Not Authorized"
+    end
 end
 
 
@@ -268,6 +271,11 @@ end
 
 
 
+
+
+
+
+end
 
 # ------------------------------------
 
