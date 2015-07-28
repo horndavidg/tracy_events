@@ -64,23 +64,46 @@ end
 
   def send_to_google
 
-    calendar = Google::Apis::CalendarV3::CalendarService.new
+    @event = Event.find_by_id(params[:event_id])
 
-    calendar.authorization = Signet::OAuth2::Client.new({
-      client_id: ENV['CLIENT_ID'],
-      client_secret: ENV['CLIENT_SECRET'],
-      access_token: @current_user.access_token
-    })
+    if @event 
+      calendar = Google::Apis::CalendarV3::CalendarService.new
 
-    event = Google::Apis::CalendarV3::Event.new(summary: 'A third sample event',
-                                location: '1600 Amphitheatre Parkway, Mountain View, CA 94045',
+      calendar.authorization = Signet::OAuth2::Client.new({
+        client_id: ENV['CLIENT_ID'],
+        client_secret: ENV['CLIENT_SECRET'],
+        access_token: @current_user.access_token
+      })
+      @summary = @event.name
+      @location = @event.address
+      @start_time = Chronic.parse(@event.start_time)
+      # @start_time = Chronic.parse("five hours after " + @event.start_time)
+      @end_time = Chronic.parse(@event.end_time)
+      # @end_time = Chronic.parse("five hours after " + @event.end_time)
+      # @end_time = @event.end_time
+      # binding.pry
 
-                                start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
-                                end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
-    event = calendar.insert_event('primary', event, send_notifications: true)
+      event = Google::Apis::CalendarV3::Event.new(summary: @summary,
+                                  # location: '1600 Amphitheatre Parkway, Mountain View, CA 94045',
+
+                                  # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
+                                  # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
+
+                                  location: @location,
+
+                                  start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s)),
+                                  end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s)))
+      event = calendar.insert_event('primary', event, send_notifications: true)
 
 
-    redirect_to events_path
+      redirect_to events_path, flash: {success: "#{@summary} was added to your Google Calendar"}
+    else
+
+      redirect_to events_path, flash: {alert: "Sorry, something went wrong, please try again."}
+
+    end
+
+
     
   end
 

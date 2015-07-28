@@ -1,11 +1,12 @@
 <h1 class="text-center">See all Events</h1>
 
 
-<%= link_to "Add this to google calendar", send_to_google_path%>
+
 
 <% if @events%>
 
 <% @events.each do |event|%>
+
 
 <div>
 <h4>Event Name:</h4>
@@ -18,6 +19,7 @@
 <div>
 <h5>Created By: <%= link_to event.creator_name, user_path(event.creator_id) %></h5>
 </div>
+<a href="/send_to_google?event_id=<%= event.id %>"><img src="https://www.google.com/calendar/b/0/images/calendar_plus_en.gif" alt="Add to Google Calendar"></a>
 <% end %>
 
 <% else %>
