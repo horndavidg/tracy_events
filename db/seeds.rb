@@ -31,12 +31,12 @@ e1 = Event.create({
 	
 	start_time: "13:00",
 	end_time: "14:00",
-	name: "Test",
+	name: "Test1",
 	address: "2435 Lincoln Blvd. Tracy, CA, 95376",
 
 	lat: "37.754639",
 	long: "-121.443922",
-	description: "This test is a test event."
+	description: "This test is a test event.",
 	creator_name: "David"	
 	})
 
@@ -46,12 +46,12 @@ e2 = Event.create({
 	end_date: Chronic.parse("29 Jul 2015 2pm"),
 	start_time: "13:00",
 	end_time: "14:00",
-	name: "Test",
+	name: "Test2",
 	address: "2435 Lincoln Blvd. Tracy, CA, 95376",
 
 	lat: "37.754639",
 	long: "-121.443922",
-	description: "This test is a test event."
+	description: "This test is a test event.",
 	creator_name: "David"	
 	})
 
@@ -61,12 +61,12 @@ e3 = Event.create({
 	end_date: Chronic.parse("29 Jul 2015 2pm"),
 	start_time: "13:00",
 	end_time: "14:00",
-	name: "Test",
+	name: "Test3",
 	address: "2435 Lincoln Blvd. Tracy, CA, 95376",
 
 	lat: "37.754639",
 	long: "-121.443922",
-	description: "This test is a test event."
+	description: "This test is a test event.",
 	creator_name: "Parker"	
 	})
 
