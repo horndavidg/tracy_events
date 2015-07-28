@@ -1,3 +1,10 @@
-<h1>User Show Page</h1>
+<h1><%= @user.name%></h1>
 
-<p><%= @user%></p>
+<h3>Email: <%= @user.email%></h3>
+
+
+<% @user.events.each do |event| %>
+
+<p><%= event.name%></p>
+
+<% end %>
