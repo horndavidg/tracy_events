@@ -1,0 +1,15 @@
+<%= form_for([@event, @comment], html:{class:"form-horizontal", role:"form"}) do |f| %>
+	<%= render partial:'shared/errors', locals:{instance:@comment}  %>
+	
+
+	<div class="form-group">
+		<%= f.label :content, class:"col-md-2"  %>
+		<div class="col-sm-7">
+			<%= f.text_area :content, class:"form-control" %>
+		</div>
+	</div>
+
+	<div class="actions col-sm-offset-2">
+		<%= f.submit class:"btn btn-primary" %>
+	</div>
+<% end %>

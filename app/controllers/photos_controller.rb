@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   
-before_action :set_photo, only: [:destroy, :edit, :update]  
+before_action :set_photo, only: [:destroy, :edit, :update]
+before_action :set_event, only: [:create]    
 
 
 # ----------------------------
@@ -29,6 +30,7 @@ end
 if @photo.save
 	redirect_to event_path(@photo.event_id), flash: {success: "Picture Added!"}
     else
+    @comment = Comment.new
     render "events/show"
 end	
   	
@@ -98,5 +100,13 @@ end
     @photo = Photo.find params[:id]
  end
 
+ def set_event
+    @event = Event.find params[:event_id]
+ end
+
+ def set_comment
+    event = Event.find params[:event_id]
+    @comments = event.comments
+ end
 
 end

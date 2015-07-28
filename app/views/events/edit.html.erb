@@ -5,6 +5,8 @@
 <br>
 <%= render partial: 'form' %>
 
+<h3>Edit Photos:</h3>
+
 <div class="row">
   <% @event.photos.each do |photo| %>
     <div class="col-sm-6 col-md-4" style="height:436.667px;">
@@ -19,3 +21,11 @@
     </div>
   <% end %>
 </div>
+
+<h3>Edit Comments:</h3>
+ <% @event.comments.each do |comment| %>
+<blockquote>
+<p><%= comment.content%></p>
+<footer><%= link_to comment.creator_name, user_path(comment.creator_id) %></footer>
+</blockquote>
+  <% end %>

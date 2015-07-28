@@ -1,3 +1,6 @@
+ <%= link_to "Edit", edit_event_path(@event.id), class:"btn btn-info"%>
+ <br>
+
 <h1><%= @event.name %></h1>
 <h2><%= @event.description%></h2>
 
@@ -14,12 +17,14 @@
     </div>
   <% end %>
 </div>
+<h3>Comments:</h3>
  <% @event.comments.each do |comment| %>
 <blockquote>
 <p><%= comment.content%></p>
+<footer><%= link_to comment.creator_name, user_path(comment.creator_id) %></footer>
 </blockquote>
   <% end %>
- <%= link_to "Edit", edit_event_path(@event.id), class:"btn btn-info"%>
+
 <h2>Add Photos:</h2>
 
  <%= render partial: 'photo_form' %>

@@ -29,6 +29,7 @@ end
 if @comment.save
 	redirect_to event_path(@comment.event_id), flash: {success: "Comment Added!"}
     else
+    @photo = Photo.new
     render "events/show"
 end	
   
