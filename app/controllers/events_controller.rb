@@ -21,48 +21,113 @@ class EventsController < ApplicationController
 
 def create
 
-lat = ""
-long = ""
 
-unless params[:event][:address] == ""
+if params[:event][:address] == ""
 
-query = URI.encode(params[:event][:address])
-loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}")
-result = JSON.parse loc.response_body
+redirect_to events_path, flash: {alert: "Please enter a valid address!"}
 
-if result["results"] == []
+
+elsif params[:event][:address] != ""
+
+  query = URI.encode(params[:event][:address])
+  loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}")
+  result = JSON.parse loc.response_body
+
+    if result["results"] == []
+     
+     redirect_to events_path, flash: {alert: "Please enter a valid address!"}
+    
+    else
+
+    lat = result["results"][0]["geometry"]["location"]["lat"]
+    long = result["results"][0]["geometry"]["location"]["lng"]
+    
+    @event = Event.new event_params
+    @event.lat = lat
+    @event.long = long
+    @event.creator_id = @current_user.id
+    @event.creator_name = @current_user.name
+
+
+      if @event.save
+        @user.events << @event
+        redirect_to events_path, flash: {success: "#{@event.name} Added!"}
+          else
+          @events = Event.all
+          @user = User.find @current_user.id
+          flash.now[:alert] = "Please make sure you have entered a valid address!"
+          render :index
+      end 
+
+
+    end
+  
+end
+
+    
+end
+
+# ------------------------------------
+
+# @event = Event.new event_params
+# @event.lat = lat
+# @event.long = long
+
+# if @current_user
+#     @event.creator_id = @current_user.id
+#     @event.creator_name = @current_user.name
+#        # @user.events << @event
+# end  
+
+# if @event.save
+#   @user.events << @event
+#   redirect_to events_path, flash: {success: "#{@event.name} Added!"}
+#     else
+#     @events = Event.all
+#     @user = User.find @current_user.id
+#     flash.now[:alert] = "Please make sure you have entered a valid address!"
+#     render :index
+# end 
+
+# unless params[:event][:address] == ""
+
+# query = URI.encode(params[:event][:address])
+# loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}")
+# result = JSON.parse loc.response_body
+
+# if result["results"] == []
 
 # redirect_to events_path, flash: {alert: "Please enter a valid address!"}
-flash.now[:alert] = "Please enter a valid address!"
+# # flash.now[:alert] = "Please enter a valid address!"
 
-else
+# else
 
-lat = result["results"][0]["geometry"]["location"]["lat"]
-long = result["results"][0]["geometry"]["location"]["lng"]
+# lat = result["results"][0]["geometry"]["location"]["lat"]
+# long = result["results"][0]["geometry"]["location"]["lng"]
 
-end
+# end
 
-end
+# end
 
-@event = Event.new event_params
-@event.lat = lat
-@event.long = long
+# @event = Event.new event_params
+# @event.lat = lat
+# @event.long = long
 
-if @current_user
-   @event.creator_id = @current_user.id
-   @event.creator_name = @current_user.name
-   # @user.events << @event
-end  
+# if @current_user
+#    @event.creator_id = @current_user.id
+#    @event.creator_name = @current_user.name
+#    # @user.events << @event
+# end  
 
-if @event.save
-  @user.events << @event
-	redirect_to events_path, flash: {success: "#{@event.name} Added!"}
-    else
-    @events = Event.all
-    @user = User.find @current_user.id
-    render :index
-end	
-end
+# if @event.save
+#   @user.events << @event
+# 	redirect_to events_path, flash: {success: "#{@event.name} Added!"}
+#     else
+#     @events = Event.all
+#     @user = User.find @current_user.id
+#     flash.now[:alert] = "Please make sure you have entered a valid address!"
+#     render :index
+# end	
 
 # ------------------------------------
 
@@ -188,3 +253,56 @@ end
 
 
 end
+
+
+
+
+
+
+
+# ------------------------------------
+
+# def create
+
+# lat = ""
+# long = ""
+
+# unless params[:event][:address] == ""
+
+# query = URI.encode(params[:event][:address])
+# loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}")
+# result = JSON.parse loc.response_body
+
+# if result["results"] == []
+
+# # redirect_to events_path, flash: {alert: "Please enter a valid address!"}
+# flash.now[:alert] = "Please enter a valid address!"
+
+# else
+
+# lat = result["results"][0]["geometry"]["location"]["lat"]
+# long = result["results"][0]["geometry"]["location"]["lng"]
+
+# end
+
+# end
+
+# @event = Event.new event_params
+# @event.lat = lat
+# @event.long = long
+
+# if @current_user
+#    @event.creator_id = @current_user.id
+#    @event.creator_name = @current_user.name
+#    # @user.events << @event
+# end  
+
+# if @event.save
+#   @user.events << @event
+#   redirect_to events_path, flash: {success: "#{@event.name} Added!"}
+#     else
+#     @events = Event.all
+#     @user = User.find @current_user.id
+#     render :index
+# end 
+# end
