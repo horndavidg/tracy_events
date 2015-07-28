@@ -30,6 +30,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
 gem 'json'
+gem 'handlebars_assets'
 
 gem 'google-api-client', '0.9.pre2'
 gem 'chronic'
