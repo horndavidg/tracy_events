@@ -20,6 +20,26 @@ class EventsController < ApplicationController
 # ------------------------------------
 
 def create
+#   query = URI.encode(params[:q])
+
+# song = Typhoeus.get("https://itunes.apple.com/search?term=#{query}")
+# # movie = Typhoeus.get("https://www.imbd.com", followlocation: true)
+# result = JSON.parse song.response_body.to_s
+
+# @results = result["results"]
+query = URI.encode(params[:event][:address])
+loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}")
+result = JSON.parse loc.response_body
+lat = result["results"][0]["geometry"]["location"]["lat"]
+long = result["results"][0]["geometry"]["location"]["lng"]
+puts lat
+puts long
+
+
+binding.pry
+
+
+
 
 @event = Event.new event_params
 
@@ -124,20 +144,7 @@ redirect_to event_path(@event.id), flash: {success: "#{@user.name} is Attending!
     redirect_to events_path, flash: {success: "#{@event.name} was successfully Deleted!"}
  end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ # ------------------------------------
 
 
 private  

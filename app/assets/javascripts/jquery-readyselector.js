@@ -13,5 +13,5 @@
         $(this).each(fn);
       }, this));
     }
-  }
+  };
 })(jQuery);
