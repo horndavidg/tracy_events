@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
  # Stop a logged in user from going to the sign up page
   def prevent_login_signup
     if session[:user_id]
-      redirect_to events_path, notice: "You are already logged in"
+      redirect_to events_path
  
     end
   end

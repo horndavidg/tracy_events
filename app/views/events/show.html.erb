@@ -1,8 +1,7 @@
-
-<% if current_user.id == @event.creator_id.to_i%>
- <%= link_to "Edit", edit_event_path(@event.id), class:"btn btn-info"%>
+<% if current_user == nil or current_user.id != @event.creator_id.to_i%>
+<%= link_to "Attend Event", attend_path(@event.id), method: :post,  class:"btn btn-primary" %>
 <% else %>
-   <%= link_to "Attend Event", attend_path(@event.id), method: :post,  class:"btn btn-primary" %>
+ <%= link_to "Edit", edit_event_path(@event.id), class:"btn btn-info"%>
 <% end %>
  <br>
 
