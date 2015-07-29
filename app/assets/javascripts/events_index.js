@@ -54,7 +54,7 @@ function postEvent() {
 		$("div.container").prepend(html)
 	} else if (!end_date) {
 		$(".validation").hide()
-		var html = '<div class="text-center alert alert-danger validation">Please enter a end_date for this event</div>'
+		var html = '<div class="text-center alert alert-danger validation">Please enter an end_date for this event</div>'
 		$("div.container").prepend(html)
 	} else if (!start_time) {
 		$(".validation").hide()
@@ -62,11 +62,11 @@ function postEvent() {
 		$("div.container").prepend(html)
 	} else if (!end_time) {
 		$(".validation").hide()
-		var html = '<div class="text-center alert alert-danger validation">Please enter a end_time for this event</div>'
+		var html = '<div class="text-center alert alert-danger validation">Please enter an end_time for this event</div>'
 		$("div.container").prepend(html)
 	} else if (!address) {
 		$(".validation").hide()
-		var html = '<div class="text-center alert alert-danger validation">Please enter a address for this event</div>'
+		var html = '<div class="text-center alert alert-danger validation">Please enter an address for this event</div>'
 		$("div.container").prepend(html)
 	} else if (!description) {
 		$(".validation").hide()
