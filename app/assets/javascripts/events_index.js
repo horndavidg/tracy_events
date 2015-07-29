@@ -99,7 +99,7 @@ function postEvent() {
 		    var orderedDate = date.slice(5,7) + "/" + date.slice(8,10) + "/" + date.slice(0,4);
 
 		    //putting event on map
-		    makeMarker(response.lat, response.long)
+		    makeMarker(response.lat, response.long, response.name)
 		    var html = '<tr class="alert-success alert"><td><a href="/events/' + response.id + '">' + response.name + '</a></td><td>' + orderedDate + '</td></tr>'
 		    $("table tbody").prepend(html)
 
@@ -142,7 +142,7 @@ function initialize() {
 	    	// console.log(data)
 	    	data.forEach(function(event) {
 
-	    		makeMarker(event.lat, event.long)
+	    		makeMarker(event.lat, event.long, event.name)
 
 			    var date = event.start_date.substring(0, event.start_date.length - 14)
 			    var orderedDate = date.slice(5,7) + "/" + date.slice(8,10) + "/" + date.slice(0,4);
@@ -155,14 +155,14 @@ function initialize() {
 	});
 }
 
-function makeMarker(lat, long) {
+function makeMarker(lat, long, name) {
 		var myLatlng = new google.maps.LatLng(lat,long);
 
 	    var marker = new google.maps.Marker({
 
 	        position: myLatlng,
 	        map: map,
-            title: "Event name: " + event.name
+            title: "Event name: " + name
 	          
 	    });
 }
