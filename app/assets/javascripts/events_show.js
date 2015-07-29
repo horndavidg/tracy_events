@@ -89,8 +89,10 @@ ready = function() {
 	$("#add_comments_button").click(function(e) {
 		e.preventDefault()
 		if($("#photo_drop_down").attr("display") !== "none") {
-			console.log("HELLO")
-			$( "#comment_drop_down" ).slideToggle( "slow" )	
+			$( "#comment_drop_down" ).slideToggle( "slow", function() {
+				$("#comment_content").focus()	
+			} )	
+			
 		}
 	})
 
@@ -123,8 +125,14 @@ ready = function() {
 			   ).done(function(response) {
 			   	console.log(response)
 
+			   	if (!response) {
+			   		console.log("hello")
+			   	}
+
 			   	//Clearing Table and Sliding Back up
 
+			   	$(".content").val("")
+			   	$( "#comment_drop_down" ).slideUp( "slow" )
 
 
 			   	//Putting Comment on Page
