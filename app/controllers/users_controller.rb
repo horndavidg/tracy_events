@@ -1,3 +1,4 @@
+require 'chronic'
 class UsersController < ApplicationController
   
   
@@ -9,10 +10,11 @@ class UsersController < ApplicationController
   def show
   	@user = User.find params[:id]
 
-  	@created_current_events = Event.where("creator_id = ?", @user.id).where("start_date >= ?", Date.today)
-  	@created_past_events = Event.where('creator_id: ?', @user.id).where('start_date < ?', Date.today)
-  	binding.pry
+  	@created_current_events = Event.order(start_date: :asc).where(creator_id: @user.id).where("start_date >= ?", Time.now)
+  	@created_past_events = Event.order(start_date: :asc).where(creator_id: @user.id).where('start_date < ?', Time.now)
     @created_events = Event.where(creator_id: @user.id)
+
+    #need @attending_events and @attended_events
   end
 
 # -----------------------------------------

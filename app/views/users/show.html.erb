@@ -1,23 +1,136 @@
-<h1><%= @user.name%></h1>
+<h1 class="page-header"><%= @user.name%></h1>
 
-<h2>Email: <%= @user.email%></h2>
+<h2><%= @user.email %></h2>
 
-<h3>Events Created:</h3>
-<% @created_events.each do |event| %>
+<!-- Created -->
+<div class="row">
+	<div class="col-md-6" style="height: 400px; overflow: scroll">
+		<h3>Upcoming Events 
 
-<h5><%= event.name%></h5>
+			<% if @current_user.id == @user.id%>			
+				You 
+			<% else %>
+				<%= @user.name %> 
+			<% end %>
 
-<% end %>
+			Created</h3>
+
+			<table class="table-hover table">
+				<thead>
+					<tr>
+						<th>Event</th>
+
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @created_current_events.each do |event| %>
+						<tr>
+							<td><%= link_to event.name, event_path(event.id) %></td>
+
+						</tr>
+
+						<% end %>	
+				</tbody>
+			</table>
+
+	</div>
+
+	<div class="col-md-6" style="height: 400px; overflow: scroll">
+		<h3>Past Events 
+
+			<% if @current_user.id == @user.id%>			
+				You
+			<% else %>
+				<%= @user.name %>
+			<% end %>
+
+			Created:
+
+		</h3>
+			<table class="table-hover table">
+				<thead>
+					<tr>
+						<th>Event</th>
+
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @created_past_events.each do |event| %>
+						<tr>
+							<td><%= link_to event.name, event_path(event.id) %></td>
+
+						</tr>
+
+						<% end %>	
+				</tbody>
+			</table>
+
+	</div>
+</div>
 
 
-<h3>Events Attending:</h3>
-<% @user.events.each do |event| %>
+<!-- Attending -->
+<div class="row">
 
-<h5><%= event.name%></h5>
+	<div class="col-md-6" style="height: 400px; overflow: scroll">
+		<h3>Upcoming Events 
 
-<% if @current_user.id == @user.id%>
 
-<button type="button" class="btn btn-warning btn-xs"><%= link_to "changed my mind", not_attending_path(event.id), method: :delete %></button>
+			<% if @current_user.id == @user.id%>			
+				You're
+			<% else %>
+				<%= @user.name %> is
+			<% end %>
 
-<% end %>
-<% end %>
+
+			 Attending:
+
+		</h3>
+			<table class="table-hover table">
+				<thead>
+					<tr>
+						<th>Event</th>
+						<% if @current_user.id == @user.id %>
+							<th>Change Your Mind?</th>
+						<% end %>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @user.events.each do |event| %>
+						<tr>
+							<td><%= link_to event.name, event_path(event.id) %></td>
+
+							<% if @current_user.id == @user.id%>
+
+								<td><button type="button" class="btn btn-warning btn-xs"><%= link_to "Changed My Mind", not_attending_path(event.id), method: :delete %></button></td>
+
+							<% end %>
+
+						</tr>
+
+						<% end %>	
+				</tbody>
+			</table>
+
+	</div>
+	<div class="col-md-6" style="height: 400px; overflow: scroll">
+		<h3>Past Events 
+
+			<% if @current_user.id == @user.id%>			
+				You've 
+			<% else %>
+				<%= @user.name %> 
+			<% end %>
+
+			Attended</h3>
+			<table class="table-hover table">
+	
+
+	</div>
+</div>
+
+
+

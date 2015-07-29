@@ -43,8 +43,48 @@
 
 <h2>Add Photos:</h2>
 
- <%= render partial: 'photo_form' %>
 
- <h2>Add Comments:</h2>
 
- <%= render partial: 'comment_form' %>
+<h2>Add Comments:</h2>
+
+<!-- Hidden divs to add pics and comments -->
+
+<% if @current_user %>
+
+  <div class="add_things" id="add_photos_div"><%= link_to "Add Photos", events_path, class:"btn btn-primary", id:"add_photos_button" %></div>
+  <div class="add_things" id="add_comments_div"><%= link_to "Add Comments", events_path, class:"btn btn-success", id:"add_comments_button" %></div>
+
+
+  <div class="row">
+
+      <div class="col-md-6" id="photo_drop_down">
+        <%= render partial: 'photo_form' %>
+      </div>
+
+      <div class="col-md-6" id="comment_drop_down">
+        <%= render partial: 'comment_form' %>
+      </div>
+
+  </div>
+
+<% end %>
+
+
+
+
+
+
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+

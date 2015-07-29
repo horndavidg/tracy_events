@@ -7,3 +7,29 @@
 	display: none;
 }
 
+.add_things{
+	display: inline-block;
+	text-align: center;
+
+}
+#add_photos_div {
+	width: 50%
+}
+
+#add_comments_div {
+	padding-left: 15%
+}
+
+#photo_drop_down {
+	padding-top: 15px;
+	padding-left: 10%;
+	display: none;
+	text-align: center
+}
+
+#comment_drop_down {
+	padding-left: 10%;
+	display: none;
+	text-align: center
+}
+
