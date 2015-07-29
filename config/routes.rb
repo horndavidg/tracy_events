@@ -9,14 +9,14 @@ Rails.application.routes.draw do
 
   get "/logout" => "sessions#logout"
 
-  delete "/events/:id", to: "events#not_attending", as: "not_attending" 
-
+  # delete "/events/:id", to: "events#not_attending", as: "not_attending" 
+  delete "/events/:id", to: "events#destroy", as: "remove_event" 
   get "/json_events" => "events#index"
-
+  delete "/events/:id/change", to: "events#not_attending", as: "not_attending" 
   get "/auth/:provider/callback" => 'sessions#create'
   resources :sessions, only: [:new]
   resources :users, only: [:show,:destroy,:update]
-  resources :events, except: [:new] do
+  resources :events, except: [:new,:destroy] do
   resources :comments, only: [:create, :edit, :update, :destroy], shallow: true
   resources :photos, only: [:edit, :create, :destroy, :update], shallow: true
   end

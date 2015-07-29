@@ -241,6 +241,7 @@ redirect_to event_path(@event.id), flash: {success: "#{@user.name} is Attending!
  # ------------------------------------
  
  def destroy
+  binding.pry
     @event.destroy
     redirect_to events_path, flash: {success: "#{@event.name} was successfully Deleted!"}
  end
