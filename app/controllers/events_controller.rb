@@ -4,13 +4,11 @@ require 'google/apis/calendar_v3'
 
 class EventsController < ApplicationController
 
-
-  before_action :set_event, only: [:show, :attend, :destroy, :edit, :update]
-  before_action :find_user, only: [:attend, :create]
-  before_action :confirm_logged_in, only: [:edit]
+  before_action :confirm_logged_in, only: [:edit, :attend]
   before_action :ensure_correct_user_for_event, only: [:edit]
-
-
+  before_action :set_event, only: [:show, :attend, :destroy, :edit, :update, :not_attending]
+  before_action :find_user, only: [:attend, :create, :not_attending]
+  
 # ------------------------------------
 
 
@@ -28,6 +26,16 @@ class EventsController < ApplicationController
     end
 
   end
+
+# ------------------------------------
+
+def not_attending
+
+@user.events.delete(@event)
+
+redirect_to user_path(current_user.id)
+
+end
 
 # ------------------------------------
 

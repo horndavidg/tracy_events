@@ -1,8 +1,9 @@
 class PhotosController < ApplicationController
   
+before_action :confirm_logged_in, except: [:show, :index]
+before_action :ensure_correct_user_for_photo, only: [:create, :edit]
 before_action :set_photo, only: [:destroy, :edit, :update]
 before_action :set_event, only: [:create]    
-before_action :confirm_logged_in, except: [:show, :index]
 
 # ----------------------------
 
@@ -111,7 +112,16 @@ end
  end
 
 
-
+def ensure_correct_user_for_photo
+    attending = []
+    event = Event.find params[:event_id]
+    event.users.each do |user|
+        attending << user.id
+    end
+    unless attending.any? {|id| id == current_user.id}
+      redirect_to :back, alert: "Not Authorized"
+    end
+end
 
 
 

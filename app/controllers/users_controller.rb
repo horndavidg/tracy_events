@@ -13,14 +13,6 @@ class UsersController < ApplicationController
 
 # -----------------------------------------
 
-  def destory
-
-  end
-
-
-
-
-
 
 
 

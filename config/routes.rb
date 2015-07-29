@@ -9,14 +9,16 @@ Rails.application.routes.draw do
 
   get "/logout" => "sessions#logout"
 
+  delete "/events/:id", to: "events#not_attending", as: "not_attending" 
+
   get "/json_events" => "events#index"
 
   get "/auth/:provider/callback" => 'sessions#create'
   resources :sessions, only: [:new]
   resources :users, only: [:show,:destroy,:update]
   resources :events, except: [:new] do
-    resources :comments, only: [:create, :edit, :update, :destroy], shallow: true
-    resources :photos, only: [:edit, :create, :destroy, :update], shallow: true
+  resources :comments, only: [:create, :edit, :update, :destroy], shallow: true
+  resources :photos, only: [:edit, :create, :destroy, :update], shallow: true
   end
 
   get "send_to_google", to: "events#send_to_google", as: "send_to_google"

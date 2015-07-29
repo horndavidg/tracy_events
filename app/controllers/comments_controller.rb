@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
   
+before_action :confirm_logged_in, except: [:show, :index]
 before_action :set_event, only: [:create]
 before_action :set_comment, only: [:destroy, :edit, :update]
-before_action :confirm_logged_in, except: [:show, :index]
 
 # -----------------------------
 

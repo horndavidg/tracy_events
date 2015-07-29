@@ -13,6 +13,6 @@
 <h4>Events Attending:</h4>
 <% @user.events.each do |event| %>
 
-<p><%= event.name%></p>
+<p><%= event.name%>  /  <%= link_to "not going", not_attending_path(event.id), method: :delete %></p>
 
 <% end %>
