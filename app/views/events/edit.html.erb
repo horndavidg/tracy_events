@@ -2,6 +2,8 @@
 
  <%= link_to "Delete", remove_event_path(@event.id), method: :delete, class:"btn btn-danger" %>
 
+ <%= link_to "Attend Event", attend_path(@event.id), method: :post,  class:"btn btn-primary" %>
+
 <br>
 <br>
 
