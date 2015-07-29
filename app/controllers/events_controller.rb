@@ -42,48 +42,56 @@ end
 
 def create
 
+  # binding.pry
+  if params[:event][:address] == ""
 
-if params[:event][:address] == ""
-
-redirect_to events_path, flash: {alert: "Please enter a valid address!"}
-
-
-elsif params[:event][:address] != ""
-
-  query = URI.encode(params[:event][:address])
-  loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}&bounds=37.660450,-121.507759|37.773429,-121.329231")
-  result = JSON.parse loc.response_body
-
-    if result["results"] == []
-     
-     redirect_to events_path, flash: {alert: "Please enter a valid address!"}
-    
-    else
-
-    lat = result["results"][0]["geometry"]["location"]["lat"]
-    long = result["results"][0]["geometry"]["location"]["lng"]
-    
-    @event = Event.new event_params
-    @event.lat = lat
-    @event.long = long
-    @event.creator_id = @current_user.id
-    @event.creator_name = @current_user.name
+  redirect_to events_path, flash: {alert: "Please enter a valid address!"}
 
 
-      if @event.save
-        @user.events << @event
-        redirect_to events_path, flash: {success: "#{@event.name} Added!"}
-          else
+  elsif params[:event][:address] != ""
+
+    query = URI.encode(params[:event][:address])
+    loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}&bounds=37.660450,-121.507759|37.773429,-121.329231")
+    result = JSON.parse loc.response_body
+
+      if result["results"] == []
+       #send back json that will append to the page
+        redirect_to events_path, flash: {alert: "Please enter a valid address!"}
+      
+      else
+
+        lat = result["results"][0]["geometry"]["location"]["lat"]
+        long = result["results"][0]["geometry"]["location"]["lng"]
+        
+        @event = Event.new event_params
+        @event.lat = lat
+        @event.long = long
+        @event.creator_id = @current_user.id
+        @event.creator_name = @current_user.name
+
+
+        if @event.save
+          @user.events << @event
+          respond_to do |format|
+
+            format.html do
+              redirect_to events_path, flash: {success: "#{@event.name} Added!"}
+            end
+
+            format.json { render :json => @event }
+          end
+          
+        else
           @events = Event.all
           @user = User.find @current_user.id
           flash.now[:alert] = "Please make sure you have entered a valid address!"
           render :index
-      end 
+        end 
 
 
-    end
-  
-end
+      end
+    
+  end
 
     
 end
