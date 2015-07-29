@@ -21,7 +21,7 @@ def create
 
 
   @comment = Comment.new comment_params
-
+  binding.pry
   if @current_user
     @comment.creator_id = @current_user.id
     @comment.creator_name = @current_user.name
@@ -42,6 +42,7 @@ def create
 
 
   else
+    binding.pry
     @photo = Photo.new
     render "events/show"
   end	
