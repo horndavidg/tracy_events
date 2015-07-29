@@ -30,13 +30,13 @@ class EventsController < ApplicationController
 
 # ------------------------------------
 
-def not_attending
+# def not_attending
 
-@user.events.delete(@event)
+# @user.events.delete(@event)
 
-redirect_to user_path(current_user.id)
+# redirect_to user_path(current_user.id)
 
-end
+# end
 
 # ------------------------------------
 
@@ -241,7 +241,7 @@ redirect_to event_path(@event.id), flash: {success: "#{@user.name} is Attending!
  # ------------------------------------
  
  def destroy
-  binding.pry
+  
     @event.destroy
     redirect_to events_path, flash: {success: "#{@event.name} was successfully Deleted!"}
  end
