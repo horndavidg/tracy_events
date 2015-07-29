@@ -54,7 +54,7 @@ function postEvent() {
 		$("div.container").prepend(html)
 	} else if (!end_date) {
 		$(".validation").hide()
-		var html = '<div class="text-center alert alert-danger validation">Please enter a end_date for this event</div>'
+		var html = '<div class="text-center alert alert-danger validation">Please enter an end_date for this event</div>'
 		$("div.container").prepend(html)
 	} else if (!start_time) {
 		$(".validation").hide()
@@ -62,11 +62,11 @@ function postEvent() {
 		$("div.container").prepend(html)
 	} else if (!end_time) {
 		$(".validation").hide()
-		var html = '<div class="text-center alert alert-danger validation">Please enter a end_time for this event</div>'
+		var html = '<div class="text-center alert alert-danger validation">Please enter an end_time for this event</div>'
 		$("div.container").prepend(html)
 	} else if (!address) {
 		$(".validation").hide()
-		var html = '<div class="text-center alert alert-danger validation">Please enter a address for this event</div>'
+		var html = '<div class="text-center alert alert-danger validation">Please enter an address for this event</div>'
 		$("div.container").prepend(html)
 	} else if (!description) {
 		$(".validation").hide()
@@ -93,6 +93,16 @@ function postEvent() {
 		     dataType: 'json',
 		     data: data}
 		   ).done(function(response) {
+		    
+		    //Clearing table values and hidding make event div
+			$( ".slide" ).slideToggle( "slow")
+		    $(".name").val("")
+		    $(".start_date").val("")
+		    $(".end_date").val("")
+			$(".start_time").val("")
+			$(".end_time").val("")
+			$(".address").val("")
+			$(".description").val("")
 
 		    //putting event in table
 		    var date = response.start_date.substring(0, response.start_date.length - 14)
@@ -103,15 +113,6 @@ function postEvent() {
 		    var html = '<tr class="alert-success alert"><td><a href="/events/' + response.id + '">' + response.name + '</a></td><td>' + orderedDate + '</td></tr>'
 		    $("table tbody").prepend(html)
 
-		    //Clearing table values and hidding make event div
-			$( ".slide" ).slideToggle( "slow")
-		    $(".name").val("")
-		    $(".start_date").val("")
-		    $(".end_date").val("")
-			$(".start_time").val("")
-			$(".end_time").val("")
-			$(".address").val("")
-			$(".description").val("")
 
 		   });
 	}

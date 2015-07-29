@@ -19,22 +19,33 @@ before_action :set_comment, only: [:destroy, :edit, :update]
 
 def create
 
+
   @comment = Comment.new comment_params
+  binding.pry
+  if @current_user
+    @comment.creator_id = @current_user.id
+    @comment.creator_name = @current_user.name
+  # @comment.creator_id = @current_user.google_id
+  end  
 
-if @current_user
-   @comment.creator_id = @current_user.id
-  @comment.creator_name = @current_user.name
-# @comment.creator_id = @current_user.google_id
-end  
+  @comment.event_id = params[:event_id]
 
-@comment.event_id = params[:event_id]
+  if @comment.save
 
-if @comment.save
-	redirect_to event_path(@comment.event_id), flash: {success: "Comment Added!"}
-    else
+    respond_to do |format|
+      format.html do
+        redirect_to event_path(@comment.event_id), flash: {success: "Comment Added!"}
+      end
+        format.json { render :json => @comment }
+    end
+  	
+
+
+  else
+    binding.pry
     @photo = Photo.new
     render "events/show"
-end	
+  end	
   
 end
 
