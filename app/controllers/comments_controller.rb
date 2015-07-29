@@ -21,7 +21,7 @@ def create
 
 
   @comment = Comment.new comment_params
-  binding.pry
+ 
   if @current_user
     @comment.creator_id = @current_user.id
     @comment.creator_name = @current_user.name
@@ -69,7 +69,8 @@ end
 
 def destroy
   @comment.destroy
-  redirect_to edit_event_path(@comment.event_id), alert: "Comment Removed!"
+  redirect_to :back, alert: "Comment Removed!"
+  # redirect_to edit_event_path(@comment.event_id), alert: "Comment Removed!"
 end
 
 # ----------------------------

@@ -163,6 +163,10 @@ end
   def show
     @photo = Photo.new
     @comment = Comment.new
+    @attending = []
+    @event.users.each do |user|
+        @attending << user.id
+    end
   end
 
   # ------------------------------------

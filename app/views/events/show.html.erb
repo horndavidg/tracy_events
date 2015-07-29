@@ -34,7 +34,7 @@
 <p><%= comment.content%></p>
 <footer><%= link_to comment.creator_name, user_path(comment.creator_id) %>
 
-<% unless current_user == nil or current_user.id != comment.creator_id.to_i %>
+<% unless @current_user == nil or @current_user.id != comment.creator_id.to_i %>
 / <%= link_to "remove", comment, method: :delete %>
 <% end %>
 
@@ -52,6 +52,8 @@
 
 
 <!-- Hidden divs to add pics and comments -->
+
+<% if @attending.any? {|id| id == @current_user.id}%>
 
 <% if @current_user %>
 
@@ -76,18 +78,4 @@
   </div>
 
 <% end %>
-
-
-
-
-
-
-<br>
-<br>
-<br>
-
-
-
-
-
-
+<% end %>
