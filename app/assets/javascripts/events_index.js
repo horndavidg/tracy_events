@@ -1,11 +1,42 @@
 // var map = ""
 $(".events.index").ready(function() {
 	initialize()
+	var button = $("#add_event_button")
+	button.click(function(e) {
+		e.preventDefault()
+		console.log(e)
+		$( ".slide" ).slideToggle( "slow")
+	})
 })
 
 $(document).on('page:load', function() {
 	initialize()
+	var button = $("#add_event_button")
+	button.click(function(e) {
+		e.preventDefault()
+		console.log(e)
+		$( ".slide" ).slideToggle( "slow")
+	})
 })
+
+
+function postEvent() {
+	var name = $(".name").val()
+	var start_date = $(".start_date").val()
+	var end_date = $(".end_date").val()
+	var start_time = $(".start_time").val()
+	var end_time = $(".end_time").val()
+	var address = $(".address").val()
+	var description = $(".description").val()
+	console.log("NAME:",name)
+	console.log("START DATE:", start_date)
+	console.log("END DATE:", end_date)
+	console.log("START TIME:", start_time)
+	console.log("END TIME:", end_time)
+	console.log("ADDRESS:", address)
+	console.log("DESCRIPTION:", description)
+
+}
 
 function initialize() {
 	var mapCanvas = document.getElementById('map_canvas');

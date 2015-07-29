@@ -1,5 +1,13 @@
 <h1 class="text-center">See all Events</h1>
 
+<div class="slide">
+	<% if @event%>
+	<h1>Create an event</h1>
+
+	<%= render partial: 'form' %> 
+
+	<% end %>
+</div>
 
 <div class="row" >
 	<div class="col-md-6">
@@ -37,11 +45,4 @@
 
 
 
-
-<% if @event%>
-<h1>Create an event</h1>
-
-<%= render partial: 'form' %> 
-
-<% end %>
 
