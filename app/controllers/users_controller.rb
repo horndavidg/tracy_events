@@ -25,16 +25,38 @@ redirect_to user_path(current_user.id)
 
 end
 
+
+# -----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # -----------------------------------------
 
  private
 
   def find_user
-
-  	@user = User.find @current_user.id
-  	
+  	@user = User.find @current_user.id	
   end
-
 
 def set_event
     @event = Event.find params[:id]

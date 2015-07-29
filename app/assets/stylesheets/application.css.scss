@@ -60,11 +60,44 @@
   margin: 0;
   width: 100%;
 	height: 640px;
-	background-image:url("http://stylonica.com/wp-content/uploads/2014/02/Cute-Dog-HD-Wallpaper.jpg");
+	background-image:url("http://www.farmersagent.com/Assets/Agents/lvazquez1/Images/0a9020a5f1374755a68e481e0e9ab4a4_AdPanel.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+
+
+// Landing page options: 
+
+// http://www.farmersagent.com/Assets/Agents/lvazquez1/Images/0a9020a5f1374755a68e481e0e9ab4a4_AdPanel.jpg
+// http://elsarch.com/wp/wp-content/uploads/2012/07/grand-theatre-1.jpg
+  
+  // background: url(http://www.farmersagent.com/Assets/Agents/lvazquez1/Images/0a9020a5f1374755a68e481e0e9ab4a4_AdPanel.jpg) no-repeat center center fixed; 
+  // -webkit-background-size: cover;
+  // background-size: cover;
 }
 
+body{
+
+	background-color: #BDD6E8;
+}
+
+
+#mainNav{
+
+background-color: #9FFFC3;
+
+}
+
+.lp_text{
+
+	padding-top: 3em;
+	color: #25273B;
+}
+
+#map_canvas{
+
+	border-style: solid;
+    border-width: 3px;
+}
 
 
 
