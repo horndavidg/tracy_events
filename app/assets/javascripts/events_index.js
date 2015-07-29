@@ -34,6 +34,7 @@ $(document).on('page:load', function() {
 
 
 function postEvent() {
+// Extracting values from form
 	var name = $(".name").val()
 	var start_date = $(".start_date").val()
 	var end_date = $(".end_date").val()
@@ -42,27 +43,80 @@ function postEvent() {
 	var address = $(".address").val()
 	var description = $(".description").val()
 
+// Client side validations
 	if (!name) {
-		console.log("name cant be blank")
-	} 
-	
-	// var data = {event: 	{	name: name, 
-	// 						start_date: start_date,
-	// 						end_date: end_date,
-	// 						start_time: start_time,
-	// 						end_time: end_time,
-	// 						address: address,
-	// 						description: description
-	// 			 		}
-	// 			};
-	// $.ajax({
-	//      type: 'post',
-	//      url: '/events.json',
-	//      dataType: 'json',
-	//      data: data}
-	//    ).done(function(response) {
-	//     console.log(response)
-	//    });
+		$(".validation").hide()
+		var html = '<div class="text-center alert alert-danger validation">Please enter a name for this event</div>'
+		$("div.container").prepend(html)
+	} else if (!start_date) {
+		$(".validation").hide()
+		var html = '<div class="text-center alert alert-danger validation">Please enter a start_date for this event</div>'
+		$("div.container").prepend(html)
+	} else if (!end_date) {
+		$(".validation").hide()
+		var html = '<div class="text-center alert alert-danger validation">Please enter a end_date for this event</div>'
+		$("div.container").prepend(html)
+	} else if (!start_time) {
+		$(".validation").hide()
+		var html = '<div class="text-center alert alert-danger validation">Please enter a start_time for this event</div>'
+		$("div.container").prepend(html)
+	} else if (!end_time) {
+		$(".validation").hide()
+		var html = '<div class="text-center alert alert-danger validation">Please enter a end_time for this event</div>'
+		$("div.container").prepend(html)
+	} else if (!address) {
+		$(".validation").hide()
+		var html = '<div class="text-center alert alert-danger validation">Please enter a address for this event</div>'
+		$("div.container").prepend(html)
+	} else if (!description) {
+		$(".validation").hide()
+		var html = '<div class="text-center alert alert-danger validation">Please enter a description for this event</div>'
+		$("div.container").prepend(html)
+	} else if (!address.includes("Tracy")) {
+		$(".validation").hide()
+		var html = '<div class="text-center alert alert-danger validation">The address must include the word "Tracy" (case sensitive)</div>'
+		$("div.container").prepend(html)
+	} else {
+		$(".validation").hide()
+		var data = {event: 	{	name: name, 
+								start_date: start_date,
+								end_date: end_date,
+								start_time: start_time,
+								end_time: end_time,
+								address: address,
+								description: description
+					 		}
+					};
+		$.ajax({
+		     type: 'post',
+		     url: '/events.json',
+		     dataType: 'json',
+		     data: data}
+		   ).done(function(response) {
+
+		    //putting event in table
+		    var date = response.start_date.substring(0, response.start_date.length - 14)
+		    var orderedDate = date.slice(5,7) + "/" + date.slice(8,10) + "/" + date.slice(0,4);
+
+		    //putting event on map
+		    makeMarker(response.lat, response.long)
+		    var html = '<tr class="alert-success alert"><td><a href="/events/' + response.id + '">' + response.name + '</a></td><td>' + orderedDate + '</td></tr>'
+		    $("table tbody").prepend(html)
+
+		    //Clearing table values and hidding make event div
+			$( ".slide" ).slideToggle( "slow")
+		    $(".name").val("")
+		    $(".start_date").val("")
+		    $(".end_date").val("")
+			$(".start_time").val("")
+			$(".end_time").val("")
+			$(".address").val("")
+			$(".description").val("")
+
+		   });
+	}
+
+
 
 }
 var map
