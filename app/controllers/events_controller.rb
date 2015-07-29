@@ -180,6 +180,15 @@ end
 
   def attend
 
+
+
+
+
+
+
+
+
+
 @user.events << @event
 
 redirect_to event_path(@event.id), flash: {success: "#{@user.name} is Attending!"}

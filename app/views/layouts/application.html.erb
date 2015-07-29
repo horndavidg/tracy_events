@@ -7,6 +7,9 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
 
+ <%= include_uploadcare_widget_from_cdn version: "1.5.5", min: true %>
+  <%= uploadcare_settings %>
+
 </head>
 <body class = "<%= controller_name %> <%= action_name %>">
 
