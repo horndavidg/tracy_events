@@ -11,12 +11,13 @@
 
 <!-- Add to google calendar link -->
 <a href="/send_to_google?event_id=<%= @event.id %>"><img src="https://www.google.com/calendar/b/0/images/calendar_plus_en.gif" alt="Add to Google Calendar"></a>
-
+<br>
+<br>
 <div class="row">
   <% @event.photos.each do |photo| %>
-    <div class="col-sm-6 col-md-4" style="height:436.667px;">
+    <div class="col-sm-6 col-md-4" style="height:auto; width:auto; max-width:300px; max-height:436.667px;">
       <div class="thumbnail">
-        <%= image_tag(photo.url) %>
+        <%= image_tag(photo.url+"-/autorotate/yes/") %>
         <div class="caption">
             <p><%= photo.description %></p>
             <p>added by: <%= link_to photo.creator_name, user_path(photo.creator_id) %></p>
@@ -76,11 +77,6 @@
 <br>
 <br>
 <br>
-
-
-
-
-
 
 
 

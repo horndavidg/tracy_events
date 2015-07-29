@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   
 before_action :confirm_logged_in, except: [:show, :index]
-before_action :ensure_correct_user_for_comment, only: [:create, :edit]
+before_action :ensure_correct_user_for_comment, only: [:create]
 before_action :set_event, only: [:create]
 before_action :set_comment, only: [:destroy, :edit, :update]
 
