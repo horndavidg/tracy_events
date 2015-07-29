@@ -3,44 +3,44 @@
 <div class="form-group">
     <%= f.label :name, class: "col-sm-2" %>
     <div class="col-sm-4">
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :name, class: "form-control name" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :start_date, class: "col-sm-2" %>
     <div class="col-sm-4">
-     <%= f.date_field :start_date, class: "form-control" %>
+     <%= f.date_field :start_date, class: "form-control start_date" %>
     </div>
     <%= f.label :end_date, class: "col-sm-2" %>
     <div class="col-sm-4">
-     <%= f.date_field :end_date, class: "form-control" %>
+     <%= f.date_field :end_date, class: "form-control end_date" %>
     </div>
     </div>
     <div class="form-group">
     <%= f.label :start_time, class: "col-sm-2" %>
     <div class="col-sm-4">
-      <%= f.time_field :start_time, class: "form-control" %>
+      <%= f.time_field :start_time, class: "form-control start_time" %>
     </div>
     <%= f.label :end_time, class: "col-sm-2" %>
     <div class="col-sm-4">
-      <%= f.time_field :end_time, class: "form-control" %>
+      <%= f.time_field :end_time, class: "form-control end_time" %>
     </div>
     </div>
    <div class="form-group">
     <%= f.label :address, class: "col-sm-2" %>
     <div class="col-sm-4">
-      <%= f.text_field :address, class: "form-control", placeholder:"address in Tracy" %>
+      <%= f.text_field :address, class: "form-control address", placeholder:"Address must be include Tracy" %>
     </div>
   </div>   
   <div class="form-group">
     <%= f.label :description, class: "col-sm-2" %>
     <div class="col-sm-4">
-      <%= f.text_area :description, class: "form-control", :cols => "30", :rows => "8" %>
+      <%= f.text_area :description, class: "form-control description", :cols => "30", :rows => "8" %>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
-      <%= f.submit class:"btn btn-primary" %>
+      <%= f.submit class:"btn btn-primary new_event" %>
  
     </div>
   </div>

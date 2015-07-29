@@ -1,5 +1,13 @@
 <h1 class="text-center">See all Events</h1>
 
+<div class="slide">
+	<% if @event%>
+	<h1>Create an event</h1>
+
+	<%= render partial: 'form' %> 
+
+	<% end %>
+</div>
 
 <div class="row" >
 	<div class="col-md-6">
@@ -18,15 +26,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>al;ksd</td>
-						<td>asd</td>
 
-					</tr>
 					
 				</tbody>
 			</table>
-
 
 		<% else %>
 
@@ -42,41 +45,4 @@
 
 
 
-
-
-
-
-
-
-<% if @events%>
-
-<% @events.each do |event|%>
-
-
-<div>
-<h4>Event Name:</h4>
-<h3><%= link_to event.name, event_path(event.id)%></h3>
-</div>
-<div>
-<h4>Event Description:</h4>
-<h4><%= event.description %></h4>
-</div>
-<div>
-<h5>Created By: <%= link_to event.creator_name, user_path(event.creator_id) %></h5>
-</div>
-<a href="/send_to_google?event_id=<%= event.id %>"><img src="https://www.google.com/calendar/b/0/images/calendar_plus_en.gif" alt="Add to Google Calendar"></a>
-<% end %>
-
-<% else %>
-
-<h4>No Events Listed....</h4>
-
-<% end %>
-
-<% if @event%>
-<h1>Create an event</h1>
-
-<%= render partial: 'form' %> 
-
-<% end %>
 
