@@ -1,18 +1,23 @@
 <h1><%= @user.name%></h1>
 
-<h3>Email: <%= @user.email%></h3>
+<h2>Email: <%= @user.email%></h2>
 
-<h4>Events Created:</h4>
+<h3>Events Created:</h3>
 <% @created_events.each do |event| %>
 
-<p><%= event.name%></p>
+<h5><%= event.name%></h5>
 
 <% end %>
 
 
-<h4>Events Attending:</h4>
+<h3>Events Attending:</h3>
 <% @user.events.each do |event| %>
 
-<p><%= event.name%>  /  <%= link_to "not going", not_attending_path(event.id), method: :delete %></p>
+<h5><%= event.name%></h5>
 
+<% if @current_user.id == @user.id%>
+
+<button type="button" class="btn btn-warning btn-xs"><%= link_to "changed my mind", not_attending_path(event.id), method: :delete %></button>
+
+<% end %>
 <% end %>

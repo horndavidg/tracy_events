@@ -3,7 +3,10 @@
    <%= link_to "Attend Event", attend_path(@event.id), method: :post,  class:"btn btn-primary" %>
  <br>
 
-<h1><%= @event.name %></h1>
+<h1><%= @event.name %></h1> 
+
+<p>Created By: <%= link_to @event.creator_name, user_path(@event.creator_id) %></p>
+
 <h2><%= @event.description%></h2>
 
 <!-- Add to google calendar link -->
@@ -30,8 +33,12 @@
 </blockquote>
   <% end %>
 
-<h1>People Attending:</h1>
+<h3>People Attending:</h3>
+<% @event.users.each do |user| %>
 
+<p>- <%= user.name%></p>
+
+<% end %>
 
 
 <h2>Add Photos:</h2>
