@@ -180,19 +180,20 @@ end
 
   def attend
 
-
-
-
-
-
-
-
-
-
-@user.events << @event
-
-redirect_to event_path(@event.id), flash: {success: "#{@user.name} is Attending!"}
+    attending = []
     
+    @event.users.each do |user|
+        attending << user.id
+    end
+
+    if attending.any? {|id| id == current_user.id}
+        redirect_to :back, alert: "You are already attending this event"
+           
+        else
+        @user.events << @event
+
+        redirect_to event_path(@event.id), flash: {success: "#{@user.name} is Attending!"}
+    end
   end
 
   # ------------------------------------

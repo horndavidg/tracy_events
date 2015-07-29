@@ -105,7 +105,7 @@
 
 							<% if @current_user.id == @user.id%>
 
-								<td><button type="button" class="btn btn-warning btn-xs"><%= link_to "Changed My Mind", not_attending_path(event.id), method: :delete %></button></td>
+								<td><button type="button" class="btn btn-warning btn-xs"><%= link_to "Changed My Mind", user_path(event.id), method: :delete %></button></td>
 
 							<% end %>
 
