@@ -99,7 +99,7 @@
 				</thead>
 
 				<tbody>
-					<% @user.events.each do |event| %>
+					<% @attending_events_future.each do |event| %>
 						<tr>
 							<td><%= link_to event.name, event_path(event.id) %></td>
 
@@ -125,8 +125,27 @@
 				<%= @user.name %> 
 			<% end %>
 
-			Attended</h3>
+			Attended
+		</h3>
+
 			<table class="table-hover table">
+				<thead>
+					<tr>
+						<th>Event</th>
+						
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @attended_events_past.each do |event| %>
+						<tr>
+							<td><%= link_to event.name, event_path(event.id) %></td>
+
+						</tr>
+
+						<% end %>	
+				</tbody>
+			</table>
 	
 
 	</div>
