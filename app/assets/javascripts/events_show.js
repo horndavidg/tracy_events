@@ -130,8 +130,8 @@ ready = function() {
 			   	console.log(response)
 			//Putting Comment on Page
 
-			   	html = '<div class="col-sm-6 col-md-4" style="height:300px; width:auto; max-width:300px; max-height:436.667px;"><div class="thumbnail"><img src="' + response.url + '-/autorotate/yes/" alt="Event Photo"><div class="caption"><p>' + response.description+ '</p><p>added by: <a href="users/' + response.creator_id + '">' + response.creator_name + '</a></p></div></div></div>'
-			   	html = '<div class="col-sm-6 col-md-4 " style="height:300px; width:auto; max-width:300px; max-height:300px;"><div class="thumbnail" style="height:300px; width:auto; max-width:300px; max-height:300px; overflow-y: scroll;"><%= image_tag photo.url+"-/autorotate/yes/",class:"img-responsive" %><div class="caption"><p><%= photo.description %></p><p>added by: <%= link_to photo.creator_name, user_path(photo.creator_id) %></p></div></div></div>'
+			   	html = '<div class="col-sm-6 col-md-4" style="height:300px; width:auto; max-width:300px; max-height:300px;"><div class="thumbnail" style="height:300px; width:auto; max-width:300px; max-height:300px; overflow-y: scroll;"><img src="' + response.url + '-/autorotate/yes/" class = "img-responsive" alt="Event Photo"><div class="caption"><p>' + response.description+ '</p><p>added by: <a href="users/' + response.creator_id + '">' + response.creator_name + '</a></p></div></div></div>'
+			   	
 			   	
 			   	$(".photo_row").append(html).fadeIn(1500)
 
