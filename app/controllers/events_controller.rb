@@ -288,6 +288,7 @@ end
                               location: @location,
                               start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s), time_zone: "PST"),
                               end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s), time_zone: "PST"))
+      
       event = calendar.insert_event('primary', event, send_notifications: true)
 
 
