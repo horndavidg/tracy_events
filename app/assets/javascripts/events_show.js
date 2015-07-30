@@ -131,7 +131,7 @@ ready = function() {
 			//Putting Comment on Page
 
 			   	html = '<div class="col-sm-6 col-md-4" style="height:300px; width:auto; max-width:300px; max-height:300px;"><div class="thumbnail" style="height:300px; width:auto; max-width:300px; max-height:300px; overflow-y: scroll;"><img src="' + response.url + '-/autorotate/yes/" class = "img-responsive" alt="Event Photo"><div class="caption"><p>' + response.description+ '</p><p>added by: <a href="users/' + response.creator_id + '">' + response.creator_name + '</a></p></div></div></div>'
-			   	
+			   	var test
 			   	
 			   	$(".photo_row").append(html).fadeIn(1500)
 
