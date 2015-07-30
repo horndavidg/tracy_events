@@ -190,7 +190,7 @@ ready = function() {
 			   	//Putting Comment on Page
 
 			   	var html = '<blockquote><p>' + response.content+ '</p><footer><a href="users/' + response.creator_id + '">' + response.creator_name + '</a></footer></blockquote>'
-			   	$(".comments").append(html).hide().fadeIn(1500)
+			   	$(".comment_div").prepend(html).hide().fadeIn(1500)
 
 			   });
 		}

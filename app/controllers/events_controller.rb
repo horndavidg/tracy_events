@@ -167,10 +167,10 @@ end
     @event.users.each do |user|
         @attending << user.id
     end
-
+    @comments = @event.comments.order(created_at: :desc)
     @start_time = extract_date(@event.start_date) + " at " + convert_from_military(@event.start_time) + morning_or_night(@event.start_time)
     @end_time = extract_date(@event.end_date) + " at " + convert_from_military(@event.end_time) + morning_or_night(@event.end_time)
-    # binding.pry
+   
     respond_to do |format|
       format.html do
         render :show
