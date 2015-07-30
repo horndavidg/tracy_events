@@ -11,28 +11,37 @@
 
 <h3>Edit Photos:</h3>
 
+
+
 <div class="row photo_row">
   <% @event.photos.each do |photo| %>
-    <div class="col-sm-6 col-md-4" style="height:350px; width:auto; max-width:300px; max-height:436.667px;">
-      <div class="thumbnail">
-        <%= image_tag(photo.url+"-/autorotate/yes/") %>
+    <div class="col-sm-6 col-md-4 " style="height:300px; width:auto; max-width:300px; max-height:300px;">
+      <div class="thumbnail" style="height:300px; width:auto; max-width:300px; max-height:300px; overflow-y: scroll;">
+        <%= image_tag photo.url+"-/autorotate/yes/",class:"img-responsive" %>
         <div class="caption">
             <p><%= photo.description %></p>
-           <p>added by: <%= link_to photo.creator_name, user_path(photo.creator_id) %></p>
-          <h3><%= link_to "edit", edit_photo_path(photo) %> /  <%= link_to "remove", photo, method: :delete %></h3>
+            <p>added by: <%= link_to photo.creator_name, user_path(photo.creator_id) %></p>
         </div>
       </div>
     </div>
   <% end %>
+
 </div>
 
 
-
 <h3>Edit Comments:</h3>
- <% @event.comments.each do |comment| %>
-<blockquote>
-<h4><%= link_to "edit", edit_comment_path(comment) %> /  <%= link_to "remove", comment, method: :delete %></h4>
-<p><%= comment.content%></p>
-<footer><%= link_to comment.creator_name, user_path(comment.creator_id) %></footer>
-</blockquote>
-  <% end %>
+
+   <div class="col-md-12 comment_div"style="height: 400px; overflow: scroll;" >
+    <% @comments.each do |comment| %>
+      <blockquote>
+        <p><%= comment.content%></p>
+        <footer><%= link_to comment.creator_name, user_path(comment.creator_id) %>
+
+        <% unless @current_user == nil or @current_user.id != comment.creator_id.to_i %>
+          / <%= link_to "remove", comment, method: :delete %>
+        <% end %>
+
+        </footer>
+      </blockquote>
+    <% end %>
+  </div>

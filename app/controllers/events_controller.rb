@@ -213,6 +213,7 @@ end
   # ------------------------------------
 
   def edit
+    @comments = @event.comments.order(created_at: :desc)
   end
 
   # ------------------------------------
@@ -222,7 +223,7 @@ end
     @event = Event.find_by_id(params[:event_id])
     @user = User.find_by_id(@event.creator_id)
     @user.fresh_token
-binding.pry
+
     if @event 
 
 
