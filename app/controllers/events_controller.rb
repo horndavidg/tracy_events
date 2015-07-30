@@ -156,11 +156,8 @@ end
 #     render :index
 # end	
 
-# ------------------------------------
-def format_time(time)
-  t = (time <= 1200)?time : time - 1200
-  return (t.to_s.size == 3)?t.to_s.insert(1,":") : t.to_s.insert(2,":") 
-end
+# -----------------------------------
+
 
 
   def show
@@ -170,10 +167,10 @@ end
     @event.users.each do |user|
         @attending << user.id
     end
-    start_time = @event.start_time.to_s
-    @start_date = @event.start_date.to_s
-    @start_time = format_time(start_time)
-    binding.pry
+
+    @start_time = extract_date(@event.start_date) + " at " + convert_from_military(@event.start_time) + morning_or_night(@event.start_time)
+    @end_time = extract_date(@event.end_date) + " at " + convert_from_military(@event.end_time) + morning_or_night(@event.end_time)
+    # binding.pry
     respond_to do |format|
       format.html do
         render :show
@@ -296,41 +293,71 @@ end
 
 private  # ----------------------------------
 
-def event_params
-    params.require(:event).permit(
-      :start_date,
-      :end_date,
-      :description,
-      :duration,
-      :address, 
-      :start_time,
-      :end_time,
-      :lat,
-      :long,
-      :name
-    )
-end
+  def event_params
+      params.require(:event).permit(
+        :start_date,
+        :end_date,
+        :description,
+        :duration,
+        :address, 
+        :start_time,
+        :end_time,
+        :lat,
+        :long,
+        :name
+      )
+  end
 
- def set_event
-    @event = Event.find params[:id]
- end
-
-
-
-def find_user
-
-    @user = User.find @current_user.id
-    
-end
+   def set_event
+      @event = Event.find params[:id]
+   end
 
 
-def ensure_correct_user_for_event
-    event = Event.find params[:id]
-    unless event.creator_id.to_i == current_user.id
-      redirect_to :back, alert: "Not Authorized"
+
+  def find_user
+
+      @user = User.find @current_user.id
+      
+  end
+
+
+  def ensure_correct_user_for_event
+      event = Event.find params[:id]
+      unless event.creator_id.to_i == current_user.id
+        redirect_to :back, alert: "Not Authorized"
+      end
+  end
+
+
+# Time formatting functions
+  def format_time(time)
+    t = (time <= 1200)?time : time - 1200
+    return (t.to_s.size == 3)?t.to_s.insert(1,":") : t.to_s.insert(2,":") 
+  end
+
+  def convert_from_military(time)
+    split = time.to_s.split(" ")[1]
+    split.slice!(":00")
+    split = split.delete(":").to_i
+    split = format_time(split)
+
+  end
+
+  def morning_or_night(time)
+    time = time.to_s.split(" ")[1]
+    time.slice!(":00")
+    time = time.delete(":").to_i
+    if time < 12
+      " AM"
+    else
+      " PM"
     end
-end
-
+  end
+   
+  def extract_date(date)
+    date = date.httpdate
+    date = date[0..-14]
+  end
 
 
 

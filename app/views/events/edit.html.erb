@@ -11,9 +11,9 @@
 
 <h3>Edit Photos:</h3>
 
-<div class="row">
+<div class="row photo_row">
   <% @event.photos.each do |photo| %>
-    <div class="col-sm-6 col-md-4" style="height:auto; width:auto; max-width:300px; max-height:436.667px;">
+    <div class="col-sm-6 col-md-4" style="height:300px; width:auto; max-width:300px; max-height:436.667px;">
       <div class="thumbnail">
         <%= image_tag(photo.url+"-/autorotate/yes/") %>
         <div class="caption">
