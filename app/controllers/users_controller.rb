@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   	@created_past_events = Event.order(start_date: :asc).where(creator_id: @user.id).where('start_date < ?', Time.now)
     @created_events = Event.where(creator_id: @user.id)
 
+    # @attending_events = User.order(
     #need @attending_events and @attended_events
   end
 
@@ -23,32 +24,14 @@ class UsersController < ApplicationController
 
 def destroy
 
-@user.events.delete(@event)
+  @user.events.delete(@event)
 
-redirect_to user_path(current_user.id)
+  redirect_to user_path(current_user.id)
 
 end
 
 
 # -----------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -62,9 +45,9 @@ end
   	@user = User.find @current_user.id	
   end
 
-def set_event
-    @event = Event.find params[:id]
-end
+  def set_event
+      @event = Event.find params[:id]
+  end
 
 
 
