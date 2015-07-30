@@ -18,22 +18,30 @@ before_action :set_event, only: [:create]
 # ----------------------------
 
   def create
-  @photo = Photo.new photo_params
 
-if @current_user
-   @photo.creator_id = @current_user.id
-  @photo.creator_name = @current_user.name
-# @event.creator_id = @current_user.google_id
-end  
+    @photo = Photo.new photo_params
 
-@photo.event_id = params[:event_id]
+    if @current_user
+      @photo.creator_id = @current_user.id
+      @photo.creator_name = @current_user.name
+    # @event.creator_id = @current_user.google_id
+    end  
 
-if @photo.save
-	redirect_to event_path(@photo.event_id), flash: {success: "Picture Added!"}
+    @photo.event_id = params[:event_id]
+
+    if @photo.save
+      respond_to do |format|
+        format.html do
+          redirect_to event_path(@photo.event_id), flash: {success: "Picture Added!" }   
+        end
+        
+          format.json { render :json => @photo }
+      end
+    
     else
-    @comment = Comment.new
-    render "events/show"
-end	
+      @comment = Comment.new
+      render "events/show"
+    end	
   	
   end
 
