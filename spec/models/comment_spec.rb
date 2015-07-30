@@ -13,6 +13,17 @@ describe 'Comment' do
     it { is_expected.to respond_to :creator_id}
     it { is_expected.to respond_to :content}
  
+ describe 'comment when it is invalid' do
+    subject(:invalid_comment) { Comment.create(
+                            creator_id: "42",
+                            content: ""
+                            )}
+
+    it { is_expected.to_not be_valid}
+
+  end
+
+
 
 end
 

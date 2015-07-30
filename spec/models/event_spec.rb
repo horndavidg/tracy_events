@@ -20,6 +20,21 @@ describe 'Event' do
     it { is_expected.to respond_to :address}
     it { is_expected.to respond_to :start_time}
     it { is_expected.to respond_to :end_time}
+
+     describe 'event when it is invalid' do
+     subject(:invalid_event) { Event.create(
+
+            description: "This is the event description",
+            name: "Taco Tuesday",
+            address: "",
+            start_time: "2311",
+            end_time: "0134",
+            creator_id: "31"
+            )}
+
+    it { is_expected.to_not be_valid}
+
+  end
  
 
 end
