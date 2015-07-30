@@ -3,7 +3,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'openssl'
 # For use with Google Locally
-# OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 require "rails"
 # Pick the frameworks you want:
