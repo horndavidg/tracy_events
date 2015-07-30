@@ -210,8 +210,21 @@ end
   def send_to_google
 
     @event = Event.find_by_id(params[:event_id])
-
+ 
     if @event 
+
+
+          a = @event.start_date.to_s[0..9]
+          b = @event.start_time.to_s[10..18]
+
+          @date_start_format = a + b 
+
+          c = @event.end_date.to_s[0..9]
+          d = @event.end_time.to_s[10..18]
+
+          @date_end_format = c + d 
+
+
       calendar = Google::Apis::CalendarV3::CalendarService.new
 
       calendar.authorization = Signet::OAuth2::Client.new({
@@ -221,9 +234,14 @@ end
       })
       @summary = @event.name
       @location = @event.address
-      @start_time = Chronic.parse(@event.start_time)
+      # @start_time = @date_start_format
+      @start_time = Chronic.parse(@date_start_format)
       # @start_time = Chronic.parse("five hours after " + @event.start_time)
-      @end_time = Chronic.parse(@event.end_time)
+      # @end_time =  @date_end_format
+      @end_time = Chronic.parse(@date_end_format)
+      
+      # @end_time = Chronic.parse(@event.end_time.to_s)
+      
       # @end_time = Chronic.parse("five hours after " + @event.end_time)
       # @end_time = @event.end_time
       # binding.pry
