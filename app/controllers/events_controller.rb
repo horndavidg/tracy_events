@@ -221,8 +221,9 @@ end
   def send_to_google
 
     @event = Event.find_by_id(params[:event_id])
-    @user = User.find_by_id(@event.creator_id)
-    @user.fresh_token
+    # @user = User.find_by_id(@event.creator_id)
+    # @user.fresh_token
+    @current_user.fresh_token
 
     if @event 
 
@@ -248,7 +249,7 @@ end
       calendar.authorization = Signet::OAuth2::Client.new({
         client_id: ENV['CLIENT_ID'],
         client_secret: ENV['CLIENT_SECRET'],
-        access_token: @user.access_token
+        access_token: @current_user.access_token
       })
       @summary = @event.name
       @location = @event.address
