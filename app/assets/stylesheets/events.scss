@@ -24,13 +24,28 @@
 	padding-top: 15px;
 	padding-left: 7%;
 	display: none;
-	text-align: center
+	text-align: center;
+
 }
 
 #comment_drop_down {
 	padding-top: 15px;
 	// padding-left: 5%;
 	display: none;
-	text-align: center
+	text-align: center;
+
 }
 
+blockquote {
+	// background-color: white;
+	background-color: #9FFFC3;
+}
+
+.info_box {
+	// background-color: white
+	background-color: #9FFFC3;
+}
+
+.photo_row {
+	background-color: #9FFFC3;
+}

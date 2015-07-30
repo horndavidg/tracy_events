@@ -130,7 +130,7 @@ ready = function() {
 			   	console.log(response)
 			//Putting Comment on Page
 
-			   	html = '<div class="col-sm-6 col-md-4" style="height:auto; width:auto; max-width:300px; max-height:436.667px;"><div class="thumbnail"><img src="' + response.url + '-/autorotate/yes/" alt="Event Photo"><div class="caption"><p>' + response.description+ '</p><p>added by: <a href="users/' + response.creator_id + '">' + response.creator_name + '</a></p></div></div></div>'
+			   	html = '<div class="col-sm-6 col-md-4" style="height:300px; width:auto; max-width:300px; max-height:436.667px;"><div class="thumbnail"><img src="' + response.url + '-/autorotate/yes/" alt="Event Photo"><div class="caption"><p>' + response.description+ '</p><p>added by: <a href="users/' + response.creator_id + '">' + response.creator_name + '</a></p></div></div></div>'
 			   	$(".photo_row").append(html).fadeIn(1500)
 
 			   });
@@ -198,10 +198,51 @@ ready = function() {
 	})
 
 
+	function makeMarker(lat, long, name) {
+			var myLatlng = new google.maps.LatLng(lat,long);
+
+		    var marker = new google.maps.Marker({
+
+		        position: myLatlng,
+		        map: map,
+	            title: "Event name: " + name
+		          
+		    });
+	}
+	var data
+	var map
+	function initialize() {
+		var url = window.location.pathname
+		var urlArr = url.split("/")
+		var id = urlArr[urlArr.length -1]
+		$.ajax({
+		  type: 'GET',
+		  url: '/events/' + id + '.json',
+		  dataType: 'json'
+		}).done(function(data) {
+			event = data
+			console.log(data)
+				
+				var mapCanvas = document.getElementById('map_canvas');
+				var mapOptions = {
+
+						scrollwheel: false,
+						minZoom: 12,
+				      	center: new google.maps.LatLng(data.lat, data.long),
+				      	zoom: 16,
+				      	mapTypeId: google.maps.MapTypeId.ROADMAP
+				    };
+
+				map = new google.maps.Map(mapCanvas, mapOptions);
+				makeMarker(data.lat, data.long, data.name)
+		});
+
+		
+
+	}
 
 
-
-	
+	initialize()
 
 
 };
