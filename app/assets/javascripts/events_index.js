@@ -1,4 +1,4 @@
-// var map = ""
+
 $(".events.index").ready(function() {
 	initialize()
 

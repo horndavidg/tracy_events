@@ -157,6 +157,11 @@ end
 # end	
 
 # ------------------------------------
+def format_time(time)
+  t = (time <= 1200)?time : time - 1200
+  return (t.to_s.size == 3)?t.to_s.insert(1,":") : t.to_s.insert(2,":") 
+end
+
 
   def show
     @photo = Photo.new
@@ -164,6 +169,16 @@ end
     @attending = []
     @event.users.each do |user|
         @attending << user.id
+    end
+    start_time = @event.start_time.to_s
+    @start_date = @event.start_date.to_s
+    @start_time = format_time(start_time)
+    binding.pry
+    respond_to do |format|
+      format.html do
+        render :show
+      end
+        format.json { render :json => @event }
     end
   end
 
