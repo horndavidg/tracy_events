@@ -65,19 +65,76 @@
 var ready;
 ready = function() {
 
+
+	//Adding a photo**********************************************
+	//Dropdown for photo form
 	$("#add_photos_button").click(function(e) {
 		e.preventDefault()
 
-			if($("#helper_div").attr("display") !== "none" && !$("#helper_div").hasClass("slide")) {
-				$("#helper_div").addClass("slide")
-					$("#photo_drop_down").slideDown("slow")
-			} else if ($("#helper_div").hasClass("slide")) {
-				$("#photo_drop_down").slideUp("slow")
-				setTimeout(function() {
-					$("#helper_div").removeClass("slide")
-				}, 600)
-			}
+		if($("#helper_div").attr("display") !== "none" && !$("#helper_div").hasClass("slide")) {
+			$("#helper_div").addClass("slide")
+				$("#photo_drop_down").slideDown("slow")
+		} else if ($("#helper_div").hasClass("slide")) {
+			$("#photo_drop_down").slideUp("slow")
+			setTimeout(function() {
+				$("#helper_div").removeClass("slide")
+			}, 600)
+		}
+	})
 
+	$("#photo_drop_down input.btn.btn-primary").click(function(e) {
+		e.preventDefault()
+
+		//Extract values from form
+		var url = $("#photo_url").val()
+		var description = $("#photo_description").val()
+
+		//Client side validations
+		if (!url) {
+			$(".validation").hide()
+			var html = '<div class="text-center alert alert-danger validation">Please upload a photo.</div>'
+			$("div.container").prepend(html)
+		} else if (!description) {
+			$(".validation").hide()
+			var html = '<div class="text-center alert alert-danger validation">Please enter a description of your photo.</div>'
+			$("div.container").prepend(html)
+		} else {
+
+			$(".validation").hide()
+			var data = { photo: { 	url: url,
+									description: description 
+								} 
+						};
+			//Post to comments
+			var url = window.location.pathname
+			var urlArr = url.split("/")
+			var id = urlArr[urlArr.length -1]
+
+			$.ajax({
+			     type: 'post',
+			     url: '/events/' + id + '/photos.json',
+			     dataType: 'json',
+			     data: data}
+			   ).done(function(response) {
+
+			//Clearing Table and Sliding Back up
+
+			   	$("#photo_url").val("")
+			   	$("#photo_description").val("")
+			   	
+			   	$("#photo_drop_down").slideUp("slow")
+			   	setTimeout(function() {
+			   		$("#helper_div").removeClass("slide")
+			   	}, 600)
+
+			   	console.log(response)
+			//Putting Comment on Page
+
+			   	html = '<div class="col-sm-6 col-md-4" style="height:auto; width:auto; max-width:300px; max-height:436.667px;"><div class="thumbnail"><img src="' + response.url + '-/autorotate/yes/" alt="Event Photo"><div class="caption"><p>' + response.description+ '</p><p>added by: <a href="users/' + response.creator_id + '">' + response.creator_name + '</a></p></div></div></div>'
+			   	$(".photo_row").append(html).fadeIn(1500)
+
+			   });
+		}
 
 
 
@@ -123,11 +180,6 @@ ready = function() {
 			     dataType: 'json',
 			     data: data}
 			   ).done(function(response) {
-			   	console.log(response)
-
-			   	if (!response) {
-			   		console.log("hello")
-			   	}
 
 			   	//Clearing Table and Sliding Back up
 
@@ -139,26 +191,6 @@ ready = function() {
 
 			   	var html = '<blockquote><p>' + response.content+ '</p><footer><a href="users/' + response.creator_id + '">' + response.creator_name + '</a></footer></blockquote>'
 			   	$(".comments").append(html).hide().fadeIn(1500)
-
-
-			 //    //putting event in table
-			 //    var date = response.start_date.substring(0, response.start_date.length - 14)
-			 //    var orderedDate = date.slice(5,7) + "/" + date.slice(8,10) + "/" + date.slice(0,4);
-
-			 //    //putting event on map
-			 //    makeMarker(response.lat, response.long, response.name)
-			 //    var html = '<tr class="alert-success alert"><td><a href="/events/' + response.id + '">' + response.name + '</a></td><td>' + orderedDate + '</td></tr>'
-			 //    $("table tbody").prepend(html)
-
-			 //    //Clearing table values and hidding make event div
-				// $( ".slide" ).slideToggle( "slow")
-			 //    $(".name").val("")
-			 //    $(".start_date").val("")
-			 //    $(".end_date").val("")
-				// $(".start_time").val("")
-				// $(".end_time").val("")
-				// $(".address").val("")
-				// $(".description").val("")
 
 			   });
 		}
