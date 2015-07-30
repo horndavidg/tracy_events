@@ -38,6 +38,7 @@ gem 'handlebars_assets'
 gem 'google-api-client', '0.9.pre2'
 gem 'chronic'
 
+gem 'rails_12factor', :group => :production
 
 group :development do
   gem 'pry-rails'
