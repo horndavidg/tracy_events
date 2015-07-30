@@ -16,8 +16,16 @@ class UsersController < ApplicationController
   	@created_past_events = Event.order(start_date: :asc).where(creator_id: @user.id).where('start_date < ?', Time.now)
     @created_events = Event.where(creator_id: @user.id)
 
-    # @attending_events = User.order(
-    #need @attending_events and @attended_events
+    @attending_events_future = []
+    @attended_events_past = []
+    @user.events.each do |event|
+      if (event.start_date >= Time.now)
+        @attending_events_future << event
+      else
+        @attended_events_past << event
+      end
+    end
+
   end
 
 # -----------------------------------------
