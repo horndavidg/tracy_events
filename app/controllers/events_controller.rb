@@ -228,16 +228,18 @@ end
 
 
           a = @event.start_date.to_s[0..9]
-          # b = @event.start_time.to_s[10..18]
-          b = @event.start_time.to_s[10..22]
+          b = @event.start_time.to_s[10..18]
+          # b = @event.start_time.to_s[10..22]
 
-          @date_start_format = a + b 
+          # @date_start_format = a + b + " +07:00"
+         
+          @date_start_format = a + b
 
           c = @event.end_date.to_s[0..9]
-          # d = @event.end_time.to_s[10..18]
-          d = @event.start_time.to_s[10..22]
+          d = @event.end_time.to_s[10..18]
+          # d = @event.start_time.to_s[10..22]
 
-          @date_end_format = c + d 
+          @date_end_format = c + d
 
 
 
@@ -264,16 +266,28 @@ end
       # @end_time = @event.end_time
       # binding.pry
 
-      event = Google::Apis::CalendarV3::Event.new(summary: @summary,
-                                  # location: '1600 Amphitheatre Parkway, Mountain View, CA 94045',
+      # event = Google::Apis::CalendarV3::Event.new(summary: @summary,
+      #                             # location: '1600 Amphitheatre Parkway, Mountain View, CA 94045',
 
-                                  # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
-                                  # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
+      #                             # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
+      #                             # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
 
-                                  location: @location,
+      #                             location: @location,
 
-                                  start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s)),
-                                  end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s)))
+      #                             start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s)),
+      #                             end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s)))
+      
+
+
+  event = Google::Apis::CalendarV3::Event.new(summary: @summary,
+                              # location: '1600 Amphitheatre Parkway, Mountain View, CA 94045',
+
+                              # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
+                              # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
+
+                              location: @location,
+                              start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s), time_zone: "PST"),
+                              end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s), time_zone: "PST"))
       event = calendar.insert_event('primary', event, send_notifications: true)
 
 
