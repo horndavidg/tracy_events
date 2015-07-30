@@ -1,6 +1,6 @@
 defaults: &defaults
-  public_key: <%= ENV['UC_PUBLIC_KEY'] %> # replace it with your public key
-  private_key: <%= ENV['UC_PRIVATE_KEY'] %> # replace it with your private key
+  public_key: ENV['UC_PUBLIC_KEY'] # replace it with your public key
+  private_key: ENV['UC_PRIVATE_KEY'] # replace it with your private key
 
   # instances of widget initialized for you on page load
   live: true
