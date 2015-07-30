@@ -266,16 +266,6 @@ end
       # @end_time = @event.end_time
       # binding.pry
 
-      # event = Google::Apis::CalendarV3::Event.new(summary: @summary,
-      #                             # location: '1600 Amphitheatre Parkway, Mountain View, CA 94045',
-
-      #                             # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
-      #                             # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
-
-      #                             location: @location,
-
-      #                             start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s)),
-      #                             end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s)))
       
 
 
@@ -285,10 +275,15 @@ end
                               # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
                               # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
 
-                              location: @location,
-                              start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s), time_zone: "PST"),
-                              end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s), time_zone: "PST"))
+                              # location: @location,
+                              # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s), time_zone: "PST"),
+                              # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s), time_zone: "PST"))
       
+
+                                  location: @location,
+                                  start: Google::Apis::CalendarV3::EventDateTime.new({date_time: DateTime.parse(@start_time.to_s), time_zone: "America/Los_Angeles"}),
+                                  end: Google::Apis::CalendarV3::EventDateTime.new({date_time: DateTime.parse(@end_time.to_s), time_zone: "America/Los_Angeles"}))
+
       event = calendar.insert_event('primary', event, send_notifications: true)
 
 
