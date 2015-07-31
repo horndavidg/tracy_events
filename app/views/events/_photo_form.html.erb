@@ -3,14 +3,14 @@
 	<div class="form-group">
 		<%= f.label :url, class:"col-md-2"  %>
 		<div class="col-sm-7">
-			<%= f.uploadcare_field :url, class:"form-control" %>
+			<%= f.uploadcare_field :url, class:"form-control", id:"photo_url" %><p class="help-block">click button or link to add photos</p>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<%= f.label :description, class:"col-md-2"  %>
 		<div class="col-sm-7">
-			<%= f.text_area :description, class:"form-control" %>
+			<%= f.text_area :description, class:"form-control", id:"photo_description" %>
 		</div>
 	</div>
 

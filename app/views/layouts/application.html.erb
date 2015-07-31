@@ -25,6 +25,10 @@
           <li><%= link_to "All Events", events_path %></li>
           <% if @current_user && action_name == "index" && controller_name == "events" %>
               <li><%= link_to "Add a New Event", root_path, id:"add_event_button" %></li>
+          <% end %>  
+
+          <% if @current_user && action_name == "edit" && controller_name == "events" %>
+              <li><%= link_to "Event Show Page", event_path(@event) %></li>
           <% end %>
           
         </ul>

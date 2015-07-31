@@ -20,7 +20,9 @@
     
 
     <!-- Add to google calendar link -->
+    <% if @current_user and @attending.any? {|id| id == @current_user.id}%>
     <a href="/send_to_google?event_id=<%= @event.id %>" ><img src="https://www.google.com/calendar/b/0/images/calendar_plus_en.gif" alt="Add to Google Calendar"></a>
+    <% end %>
     <p>Created By: <%= link_to @event.creator_name, user_path(@event.creator_id) %></p>
   </div>
 
@@ -41,9 +43,8 @@
 
 <!-- Hidden divs to add pics and comments -->
 
-<% if @attending.any? {|id| id == @current_user.id}%>
 
-  <% if @current_user %>
+  <% if @current_user and @attending.any? {|id| id == @current_user.id}%>
 
     <div class="add_things" id="add_photos_div"><%= link_to "Add Photos", events_path, class:"btn btn-primary", id:"add_photos_button" %></div>
     <div class="add_things" id="add_comments_div"><%= link_to "Add Comments", events_path, class:"btn btn-success", id:"add_comments_button" %></div>
@@ -66,7 +67,7 @@
     </div>
 
   <% end %>
-<% end %>
+
 
 
 <!-- Pictures Div -->

@@ -34,7 +34,7 @@ def destroy
 
   @user.events.delete(@event)
 
-  redirect_to user_path(current_user.id)
+  redirect_to user_path(current_user.id), flash: {alert: "No longer attending Event: #{@event.name}"}
 
 end
 
