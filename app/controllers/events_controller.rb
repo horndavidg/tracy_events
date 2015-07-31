@@ -27,15 +27,6 @@ class EventsController < ApplicationController
   end
 
 # ------------------------------------
-
-# def not_attending
-
-# @user.events.delete(@event)
-
-# redirect_to user_path(current_user.id)
-
-# end
-
 # ------------------------------------
 
 def create
@@ -95,66 +86,6 @@ def create
 end
 
 # ------------------------------------
-
-# @event = Event.new event_params
-# @event.lat = lat
-# @event.long = long
-
-# if @current_user
-#     @event.creator_id = @current_user.id
-#     @event.creator_name = @current_user.name
-#        # @user.events << @event
-# end  
-
-# if @event.save
-#   @user.events << @event
-#   redirect_to events_path, flash: {success: "#{@event.name} Added!"}
-#     else
-#     @events = Event.all
-#     @user = User.find @current_user.id
-#     flash.now[:alert] = "Please make sure you have entered a valid address!"
-#     render :index
-# end 
-
-# unless params[:event][:address] == ""
-
-# query = URI.encode(params[:event][:address])
-# loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}")
-# result = JSON.parse loc.response_body
-
-# if result["results"] == []
-
-# redirect_to events_path, flash: {alert: "Please enter a valid address!"}
-# # flash.now[:alert] = "Please enter a valid address!"
-
-# else
-
-# lat = result["results"][0]["geometry"]["location"]["lat"]
-# long = result["results"][0]["geometry"]["location"]["lng"]
-
-# end
-
-# end
-
-# @event = Event.new event_params
-# @event.lat = lat
-# @event.long = long
-
-# if @current_user
-#    @event.creator_id = @current_user.id
-#    @event.creator_name = @current_user.name
-#    # @user.events << @event
-# end  
-
-# if @event.save
-#   @user.events << @event
-# 	redirect_to events_path, flash: {success: "#{@event.name} Added!"}
-#     else
-#     @events = Event.all
-#     @user = User.find @current_user.id
-#     flash.now[:alert] = "Please make sure you have entered a valid address!"
-#     render :index
-# end	
 
 # -----------------------------------
 
@@ -221,23 +152,18 @@ end
   def send_to_google
 
     @event = Event.find_by_id(params[:event_id])
-    @user = User.find_by_id(@event.creator_id)
-    @user.fresh_token
+    @current_user.fresh_token
 
     if @event 
 
 
           a = @event.start_date.to_s[0..9]
           b = @event.start_time.to_s[10..18]
-          # b = @event.start_time.to_s[10..22]
-
-          # @date_start_format = a + b + " +07:00"
          
           @date_start_format = a + b
 
           c = @event.end_date.to_s[0..9]
           d = @event.end_time.to_s[10..18]
-          # d = @event.start_time.to_s[10..22]
 
           @date_end_format = c + d
 
@@ -248,41 +174,22 @@ end
       calendar.authorization = Signet::OAuth2::Client.new({
         client_id: ENV['CLIENT_ID'],
         client_secret: ENV['CLIENT_SECRET'],
-        access_token: @user.access_token
+        access_token: @current_user.access_token
       })
       @summary = @event.name
       @location = @event.address
-      # @start_time = @date_start_format
       @start_time = Chronic.parse(@date_start_format)
-      # @start_time = Chronic.parse(@date_start_format)
-      # @start_time = Chronic.parse("five hours after " + @event.start_time)
-      # @end_time =  @date_end_format
       @end_time = Chronic.parse(@date_end_format)
-      # @end_time = Chronic.parse(@date_end_format)
-      # binding.pry
-      # @end_time = Chronic.parse(@event.end_time.to_s)
-      
-      # @end_time = Chronic.parse("five hours after " + @event.end_time)
-      # @end_time = @event.end_time
-      # binding.pry
 
       
 
 
-  event = Google::Apis::CalendarV3::Event.new(summary: @summary,
-                              # location: '1600 Amphitheatre Parkway, Mountain View, CA 94045',
-
-                              # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-27T20:00:00')),
-                              # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse('2015-07-28T02:00:00')))
-
-                              # location: @location,
-                              # start: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@start_time.to_s), time_zone: "PST"),
-                              # end: Google::Apis::CalendarV3::EventDateTime.new(date_time: DateTime.parse(@end_time.to_s), time_zone: "PST"))
-      
-
-                                  location: @location,
-                                  start: Google::Apis::CalendarV3::EventDateTime.new({date_time: DateTime.parse(@start_time.to_s), time_zone: "America/Los_Angeles"}),
-                                  end: Google::Apis::CalendarV3::EventDateTime.new({date_time: DateTime.parse(@end_time.to_s), time_zone: "America/Los_Angeles"}))
+      event = Google::Apis::CalendarV3::Event.new(
+                                      summary: @summary,
+                                      location: @location,
+                                      start: Google::Apis::CalendarV3::EventDateTime.new({date_time: DateTime.parse(@start_time.to_s), time_zone: "America/Los_Angeles"}),
+                                      end: Google::Apis::CalendarV3::EventDateTime.new({date_time: DateTime.parse(@end_time.to_s), time_zone: "America/Los_Angeles"})
+                                      )
 
       event = calendar.insert_event('primary', event, send_notifications: true)
 
@@ -389,47 +296,3 @@ end
 
 # ------------------------------------
 
-# def create
-
-# lat = ""
-# long = ""
-
-# unless params[:event][:address] == ""
-
-# query = URI.encode(params[:event][:address])
-# loc = Typhoeus.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{query}")
-# result = JSON.parse loc.response_body
-
-# if result["results"] == []
-
-# # redirect_to events_path, flash: {alert: "Please enter a valid address!"}
-# flash.now[:alert] = "Please enter a valid address!"
-
-# else
-
-# lat = result["results"][0]["geometry"]["location"]["lat"]
-# long = result["results"][0]["geometry"]["location"]["lng"]
-
-# end
-
-# end
-
-# @event = Event.new event_params
-# @event.lat = lat
-# @event.long = long
-
-# if @current_user
-#    @event.creator_id = @current_user.id
-#    @event.creator_name = @current_user.name
-#    # @user.events << @event
-# end  
-
-# if @event.save
-#   @user.events << @event
-#   redirect_to events_path, flash: {success: "#{@event.name} Added!"}
-#     else
-#     @events = Event.all
-#     @user = User.find @current_user.id
-#     render :index
-# end 
-# end

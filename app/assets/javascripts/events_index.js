@@ -136,11 +136,9 @@ function initialize() {
 	  $.ajax({
 	      type: 'GET',
 	      url: '/json_events.json',
-	      // data: data,
 	      dataType: 'json'
 	    }).done(function(data) {
-	    	// console.log("hello")
-	    	// console.log(data)
+	    	
 	    	data.forEach(function(event) {
 
 	    		makeMarker(event.lat, event.long, event.name)

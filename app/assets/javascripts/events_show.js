@@ -1,65 +1,3 @@
-// $(document).on("page:load", function() {
-// 	console.log("Hello")
-// 	//Adding a photo
-// 	$("#add_photos_button").click(function(e) {
-// 		e.preventDefault()
-// 		if($("#helper_div").attr("display") !== "none") {
-// 			$( "#photo_drop_down" ).slideToggle( "fast" )
-// 			$("#helper_div").toggleClass("slide")
-// 			// $("#helper_div").attr("display", "none")
-// 		}
-		
-
-// 	})
-
-
-// 	//Adding a comment
-// 	$("#add_comments_button").click(function(e) {
-// 		e.preventDefault()
-// 		// if($("#add_photo_button").attr("display") === "none" && $("#helper_div").attr("display") !== "none") {
-// 			console.log("HELLO")
-// 			$( "#comment_drop_down" ).slideToggle( "fast" )	
-// 		// }
-		
-		
-// 	})
-
-
-// })
-
-// $(".events.show").ready(function() {
-// console.log("hello")
-// 	//Adding a photo
-// 	$("#add_photos_button").click(function(e) {
-// 		e.preventDefault()
-// 		if($("#helper_div").attr("display") !== "none") {
-// 			$( "#photo_drop_down" ).slideToggle( "fast" )
-// 			$("#helper_div").toggleClass("slide")
-// 			// $("#helper_div").attr("display", "none")
-// 		}
-		
-
-// 	})
-
-
-// 	//Adding a comment
-// 	$("#add_comments_button").click(function(e) {
-// 		e.preventDefault()
-// 		// if($("#add_photo_button").attr("display") === "none" && $("#helper_div").attr("display") !== "none") {
-// 			console.log("HELLO")
-// 			$( "#comment_drop_down" ).slideToggle( "fast" )	
-// 		// }
-		
-		
-// 	})
-
-
-// })
-
-
-
-
-
 
 
 var ready;
@@ -74,6 +12,8 @@ ready = function() {
 		if($("#helper_div").attr("display") !== "none" && !$("#helper_div").hasClass("slide")) {
 			$("#helper_div").addClass("slide")
 				$("#photo_drop_down").slideDown("slow")
+
+				$("#photo_description").focus()
 		} else if ($("#helper_div").hasClass("slide")) {
 			$("#photo_drop_down").slideUp("slow")
 			setTimeout(function() {
@@ -127,7 +67,7 @@ ready = function() {
 			   		$("#helper_div").removeClass("slide")
 			   	}, 600)
 
-			   	console.log(response)
+
 			//Putting Comment on Page
 
 			   	html = '<div class="col-sm-6 col-md-4" style="height:300px; width:auto; max-width:300px; max-height:300px;"><div class="thumbnail" style="height:300px; width:auto; max-width:300px; max-height:300px; overflow-y: scroll;"><img src="' + response.url + '-/autorotate/yes/" class = "img-responsive" alt="Event Photo"><div class="caption"><p>' + response.description+ '</p><p>added by: <a href="users/' + response.creator_id + '">' + response.creator_name + '</a></p></div></div></div>'
@@ -223,7 +163,7 @@ ready = function() {
 		  dataType: 'json'
 		}).done(function(data) {
 			event = data
-			console.log(data)
+
 				
 				var mapCanvas = document.getElementById('map_canvas');
 				var mapOptions = {
