@@ -7,7 +7,7 @@
 	<div class="col-md-6" style="height: 400px; overflow: scroll">
 		<h3>Upcoming Events 
 
-			<% if @current_user.id == @user.id%>			
+			<% if @current_user and @current_user.id == @user.id%>			
 				You 
 			<% else %>
 				<%= @user.name %> 
@@ -39,7 +39,7 @@
 	<div class="col-md-6" style="height: 400px; overflow: scroll">
 		<h3>Past Events 
 
-			<% if @current_user.id == @user.id%>			
+			<% if @current_user and @current_user.id == @user.id%>			
 				You
 			<% else %>
 				<%= @user.name %>
@@ -78,7 +78,7 @@
 		<h3>Upcoming Events 
 
 
-			<% if @current_user.id == @user.id%>			
+			<% if @current_user and @current_user.id == @user.id%>			
 				You're
 			<% else %>
 				<%= @user.name %> is
@@ -92,7 +92,7 @@
 				<thead>
 					<tr>
 						<th>Event</th>
-						<% if @current_user.id == @user.id %>
+						<% if @current_user and @current_user.id == @user.id %>
 							<th>Change Your Mind?</th>
 						<% end %>
 					</tr>
@@ -103,7 +103,7 @@
 						<tr>
 							<td><%= link_to event.name, event_path(event.id) %></td>
 
-							<% if @current_user.id == @user.id%>
+							<% if @current_user and @current_user.id == @user.id%>
 
 								<td><button type="button" class="btn btn-warning btn-xs"><%= link_to "Changed My Mind", user_path(event.id), method: :delete %></button></td>
 
@@ -119,7 +119,7 @@
 	<div class="col-md-6" style="height: 400px; overflow: scroll">
 		<h3>Past Events 
 
-			<% if @current_user.id == @user.id%>			
+			<% if @current_user and @current_user.id == @user.id%>			
 				You've 
 			<% else %>
 				<%= @user.name %> 
