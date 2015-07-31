@@ -65,7 +65,8 @@ end
 
 def destroy
   @photo.destroy
-  redirect_to edit_event_path(@photo.event_id), alert: "Photo Removed!"
+  redirect_to :back, alert: "Photo Removed!"
+  # redirect_to edit_event_path(@photo.event_id), alert: "Photo Removed!"
 end
 
 # ----------------------------

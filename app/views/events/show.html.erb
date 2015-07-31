@@ -82,6 +82,10 @@
         <div class="caption">
             <p><%= photo.description %></p>
             <p>added by: <%= link_to photo.creator_name, user_path(photo.creator_id) %></p>
+          <% unless @current_user == nil or @current_user.id != photo.creator_id.to_i %>
+        -<%= link_to "remove", photo, method: :delete %>
+      <% end %>
+
         </div>
       </div>
     </div>

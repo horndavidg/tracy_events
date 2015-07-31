@@ -30,7 +30,15 @@
           <% if @current_user && action_name == "edit" && controller_name == "events" %>
               <li><%= link_to "Event Show Page", event_path(@event) %></li>
           <% end %>
-          
+           
+           <% if @current_user && action_name == "edit" && controller_name == "photos" %>
+              <li><%= link_to "#{@photo.event.name} Edit Page", edit_event_path(@photo.event) %></li>
+          <% end %>
+
+           <% if @current_user && action_name == "edit" && controller_name == "comments" %>
+              <li><%= link_to "#{@comment.event.name} Edit Page", edit_event_path(@comment.event) %></li>
+          <% end %>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if @current_user %>
