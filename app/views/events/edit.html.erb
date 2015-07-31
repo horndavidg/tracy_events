@@ -21,8 +21,11 @@
         <div class="caption">
             <p><%= photo.description %></p>
             <p>added by: <%= link_to photo.creator_name, user_path(photo.creator_id) %></p>
-            <p><%= link_to "edit", edit_photo_path(photo) %> / <%= link_to "remove", photo, method: :delete %> 
-
+            <p><%= link_to "remove ", photo, method: :delete %> 
+ <% unless @current_user == nil or @current_user.id != photo.creator_id.to_i %>
+ / <%= link_to "edit", edit_photo_path(photo) %>
+ <% end %>
+ </p>
         </div>
       </div>
     </div>
@@ -37,10 +40,10 @@
     <% @comments.each do |comment| %>
       <blockquote>
         <p><%= comment.content%></p>
-        <footer><%= link_to comment.creator_name, user_path(comment.creator_id) %>
+        <footer><%= link_to comment.creator_name, user_path(comment.creator_id) %> / <%= link_to "remove", comment, method: :delete %>
 
         <% unless @current_user == nil or @current_user.id != comment.creator_id.to_i %>
-          / <%= link_to "remove", comment, method: :delete %> / <%= link_to "edit", edit_comment_path(comment) %>
+         / <%= link_to "edit", edit_comment_path(comment) %>
         <% end %>
 
         </footer>
