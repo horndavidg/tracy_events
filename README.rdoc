@@ -6,6 +6,10 @@ Problems with Google Auth? Visit:
 
 https://security.google.com/settings/security/permissions
 
+Visit our site on Heroku:
+
+https://local-me.herokuapp.com/events
+
 
 
 
