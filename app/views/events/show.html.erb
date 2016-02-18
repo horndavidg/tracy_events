@@ -21,7 +21,7 @@
 
     <!-- Add to google calendar link -->
     <% if @current_user and @attending.any? {|id| id == @current_user.id}%>
-    <a href="/send_to_google?event_id=<%= @event.id %>" ><img src="https://www.google.com/calendar/b/0/images/calendar_plus_en.gif" alt="Add to Google Calendar"></a>
+    <a href="/send_to_google?event_id=<%= @event.id %>" ><img src="https://calendar.google.com/calendar/images/ext/gc_button6_en.gif" alt="Add to Google Calendar"></a>
     <% end %>
     <p>Created By: <%= link_to @event.creator_name, user_path(@event.creator_id) %></p>
   </div>
